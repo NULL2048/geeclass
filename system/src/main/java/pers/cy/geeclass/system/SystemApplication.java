@@ -1,4 +1,4 @@
-package pers.cy.geeclass;
+package pers.cy.geeclass.system;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
