@@ -1,14 +1,18 @@
-package pers.cy.geeclass.system;
+package pers.cy.geeclass.system.config;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.env.Environment;
 
 @SpringBootApplication
 @EnableEurekaClient
+@ComponentScan("pers.cy.geeclass")
+@MapperScan("pers.cy.geeclass.server.mapper")
 public class SystemApplication {
 	// 使用slf4j日志框架  真正使用的是log4j
 	private static final Logger LOG = LoggerFactory.getLogger(SystemApplication.class);
