@@ -16,7 +16,7 @@ public class TestService {
         TestExample testExample = new TestExample();
 
         // 相当于一个where条件  下面这个表示查找id字段为1的数据
-        testExample.createCriteria().andIdEqualTo("1");
+        testExample.createCriteria().andIdEqualTo(1);
 
         // 设置排序
         testExample.setOrderByClause("id asc");
