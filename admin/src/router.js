@@ -2,6 +2,7 @@ import Vue from "vue"
 import Router from "vue-router"
 import Login from "./views/login.vue"
 import Admin from "./views/admin.vue" // Admin主键名对应的页面是admin.vue
+import Welcome from "./views/admin/welcome.vue"
 
 Vue.use(Router);
 
@@ -19,6 +20,10 @@ export default new Router({
         component: Login
     }, {
         path: "/admin",  // 访问路径/admin，就会跳转到主键Admin对应的页面
-        component: Admin
+        component: Admin,
+        children:[{ // 添加子路由  子路由就是父访问链接后面再拼上子路由的访问链接
+            path: "welcome", // 子路由设置不能加斜杠
+            component: Welcome,
+        }]
     }]
 })
