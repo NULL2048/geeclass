@@ -1,5 +1,6 @@
 package pers.cy.geeclass.server.service;
 
+import org.springframework.stereotype.Service;
 import pers.cy.geeclass.server.domain.Test;
 import pers.cy.geeclass.server.domain.TestExample;
 import pers.cy.geeclass.server.mapper.TestMapper;
@@ -7,6 +8,7 @@ import pers.cy.geeclass.server.mapper.TestMapper;
 import javax.annotation.Resource;
 import java.util.List;
 
+@Service
 public class TestService {
 
     @Resource
