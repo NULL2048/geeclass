@@ -26,7 +26,7 @@ export default new Router({
             path: "welcome", // 子路由设置不能加斜杠
             component: Welcome,
         }, {
-            path: "chapter", // 子路由设置不能加斜杠
+            path: "business/chapter", // 子路由设置不能加斜杠
             component: Chapter,
         }]
     }]
