@@ -20,13 +20,16 @@ export default new Router({
         path: "/login",
         component: Login
     }, {
-        path: "/admin",  // 访问路径/admin，就会跳转到主键Admin对应的页面
+        path: "/",  // 访问路径/admin，就会跳转到主键Admin对应的页面
+        name: "admin",
         component: Admin,
         children:[{ // 添加子路由  子路由就是父访问链接后面再拼上子路由的访问链接
             path: "welcome", // 子路由设置不能加斜杠
+            name: "welcome",
             component: Welcome,
         }, {
             path: "business/chapter", // 子路由设置不能加斜杠
+            name: "business/chapter",
             component: Chapter,
         }]
     }]
