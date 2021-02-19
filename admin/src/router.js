@@ -3,6 +3,7 @@ import Router from "vue-router"
 import Login from "./views/login.vue"
 import Admin from "./views/admin.vue" // Admin主键名对应的页面是admin.vue
 import Welcome from "./views/admin/welcome.vue"
+import Chapter from "./views/admin/chapter.vue"
 
 Vue.use(Router);
 
@@ -24,6 +25,9 @@ export default new Router({
         children:[{ // 添加子路由  子路由就是父访问链接后面再拼上子路由的访问链接
             path: "welcome", // 子路由设置不能加斜杠
             component: Welcome,
+        }, {
+            path: "chapter", // 子路由设置不能加斜杠
+            component: Chapter,
         }]
     }]
 })
