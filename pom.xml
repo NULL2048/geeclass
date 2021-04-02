@@ -46,6 +46,7 @@
 			<dependency>
 				<groupId>mysql</groupId>
 				<artifactId>mysql-connector-java</artifactId>
+<!--				<version>8.0.12</version>-->
 				<version>8.0.16</version>
 <!--				<version>5.1.29</version>-->
 
@@ -81,6 +82,7 @@
 					<dependency>
 						<groupId>mysql</groupId>
 						<artifactId>mysql-connector-java</artifactId>
+<!--						<version>8.0.12</version>-->
 						<version>8.0.16</version>
 <!--						<version>5.1.29</version>-->
 					</dependency>
@@ -88,7 +90,7 @@
 			</plugin>
 		</plugins>
 	</build>
-
+2
 	<repositories>
 		<repository>
 			<id>spring-milestones</id>
