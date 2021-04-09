@@ -41,10 +41,9 @@ public class GatewayApplication {
 
 		config.setAllowCredentials(Boolean.TRUE);
 		config.addAllowedMethod("*");
-
-		// 需要用addAllowedOriginPattern方法
-		config.addAllowedOriginPattern("*");
-
+		// spring boot 2.4.0需要用addAllowedOriginPattern方法
+		// config.addAllowedOriginPattern("*");
+		config.addAllowedOrigin("*");
 		config.addAllowedHeader("*");
 		config.setMaxAge(3600L);
 
