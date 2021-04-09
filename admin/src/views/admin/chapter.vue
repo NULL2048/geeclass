@@ -977,12 +977,15 @@ export default {
   name: 'chapter',
   mounted: function () {
     let _this = this;
+    // 页面初始化之后就自动去执行下面的list方法
     _this.list();
     // this.$parent.activeSidebar("business-chapter-sidebar");
   },
   methods:{
     list() {
       let _this = this;
+      // 向接口做了一个list请求
+      // 这个是从前端localhost访问127.0.0.1的后端访问路径，会出现跨域问题，所以这里需要解决跨域问题
       _this.$ajax.get('http://127.0.0.1:9002/business/admin/chapter/list').then((response)=>{
         console.log("查询大章列表结果：", response);
       })
