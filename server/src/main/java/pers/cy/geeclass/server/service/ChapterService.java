@@ -1,6 +1,7 @@
 package pers.cy.geeclass.server.service;
 
 import com.fasterxml.jackson.databind.util.BeanUtil;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import pers.cy.geeclass.server.domain.Chapter;
@@ -19,6 +20,8 @@ public class ChapterService {
     private ChapterMapper chapterMapper;
 
     public List<ChapterDto> list() {
+        // 查找第一页，每一页有一条数据
+        PageHelper.startPage(1, 1);
         ChapterExample chapterExample = new ChapterExample();
 
         // 相当于一个where条件  下面这个表示查找id字段为1的数据
