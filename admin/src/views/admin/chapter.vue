@@ -93,9 +93,12 @@ export default {
       // 向接口做了一个list请求
       // 这个是从前端localhost访问127.0.0.1的后端访问路径，会出现跨域问题，所以这里需要解决跨域问题
       // 这里请求直接到路由网关中，再由网关进行转发
-      _this.$ajax.get('http://127.0.0.1:9000/business/admin/chapter/list').then((response)=>{
+      _this.$ajax.post('http://127.0.0.1:9000/business/admin/chapter/list',{
+        page: 1,
+        size: 1
+      }).then((response)=>{
         console.log("查询大章列表结果：", response);
-        _this.chapters = response.data;
+        _this.chapters = response.data.list;
       })
     }
   }
