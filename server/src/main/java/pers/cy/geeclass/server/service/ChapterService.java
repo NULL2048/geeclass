@@ -5,11 +5,13 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import pers.cy.geeclass.server.domain.Chapter;
 import pers.cy.geeclass.server.domain.ChapterExample;
 import pers.cy.geeclass.server.dto.ChapterDto;
 import pers.cy.geeclass.server.dto.PageDto;
 import pers.cy.geeclass.server.mapper.ChapterMapper;
+import pers.cy.geeclass.server.util.UuidUtil;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -21,6 +23,10 @@ public class ChapterService {
     @Resource
     private ChapterMapper chapterMapper;
 
+    /**
+     * 列表查询
+     * @param pageDto
+     */
     public void list(PageDto pageDto) {
         // 查找第一页，每一页有一条数据
         PageHelper.startPage(pageDto.getPage(), pageDto.getSize());
@@ -44,5 +50,21 @@ public class ChapterService {
             chapterDtoList.add(chapterDto);
         }
         pageDto.setList(chapterDtoList);
+    }
+
+    /**
+     * 添加课程
+     * 保存，id有值时更新，无值时新增
+     */
+    public void save(ChapterDto chapterDto) {
+        chapterDto.setId(UuidUtil.getShortUuid());
+        Chapter chapter = new Chapter();
+        BeanUtils.copyProperties(chapterDto, chapter);
+        chapterMapper.insert(chapter);
+//        if (StringUtils.isEmpty(chapterDto.getId())) {
+//            this.insert(chapter);
+//        } else {
+//            this.update(chapter);
+//        }
     }
 }
