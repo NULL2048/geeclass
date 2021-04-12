@@ -81,4 +81,11 @@ public class ChapterService {
         chapterMapper.updateByPrimaryKey(chapter);
     }
 
+    /**
+     * 删除
+     */
+    public void delete(String id) {
+        chapterMapper.deleteByPrimaryKey(id);
+    }
+
 }
