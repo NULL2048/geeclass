@@ -11,6 +11,7 @@ import pers.cy.geeclass.server.domain.ChapterExample;
 import pers.cy.geeclass.server.dto.ChapterDto;
 import pers.cy.geeclass.server.dto.PageDto;
 import pers.cy.geeclass.server.mapper.ChapterMapper;
+import pers.cy.geeclass.server.util.CopyUtil;
 import pers.cy.geeclass.server.util.UuidUtil;
 
 import javax.annotation.Resource;
@@ -57,14 +58,27 @@ public class ChapterService {
      * 保存，id有值时更新，无值时新增
      */
     public void save(ChapterDto chapterDto) {
-        chapterDto.setId(UuidUtil.getShortUuid());
-        Chapter chapter = new Chapter();
-        BeanUtils.copyProperties(chapterDto, chapter);
-        chapterMapper.insert(chapter);
-//        if (StringUtils.isEmpty(chapterDto.getId())) {
-//            this.insert(chapter);
-//        } else {
-//            this.update(chapter);
-//        }
+        Chapter chapter = CopyUtil.copy(chapterDto, Chapter.class);
+        if (StringUtils.isEmpty(chapterDto.getId())) {
+            this.insert(chapter);
+        } else {
+            this.update(chapter);
+        }
     }
+
+    /**
+     * 新增
+     */
+    private void insert(Chapter chapter) {
+        chapter.setId(UuidUtil.getShortUuid());
+        chapterMapper.insert(chapter);
+    }
+
+    /**
+     * 更新
+     */
+    private void update(Chapter chapter) {
+        chapterMapper.updateByPrimaryKey(chapter);
+    }
+
 }
