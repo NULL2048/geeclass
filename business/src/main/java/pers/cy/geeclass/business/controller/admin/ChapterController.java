@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import pers.cy.geeclass.server.domain.Chapter;
 import pers.cy.geeclass.server.dto.ChapterDto;
 import pers.cy.geeclass.server.dto.PageDto;
+import pers.cy.geeclass.server.dto.ResponseDto;
 import pers.cy.geeclass.server.service.ChapterService;
 
 import javax.annotation.Resource;
@@ -22,16 +23,20 @@ public class ChapterController {
     private ChapterService chapterService;
 
     @RequestMapping("/list")
-    public PageDto list(@RequestBody PageDto pageDto) {
+    public ResponseDto list(@RequestBody PageDto pageDto) {
         LOG.info("pageDto:{}", pageDto);
+        ResponseDto responseDto = new ResponseDto();
         chapterService.list(pageDto);
-        return pageDto;
+        responseDto.setContent(pageDto);
+        return responseDto;
     }
 
     @RequestMapping("/save")
-    public ChapterDto save(@RequestBody ChapterDto chapterDto) {
+    public ResponseDto save(@RequestBody ChapterDto chapterDto) {
         LOG.info("chapterDto:{}", chapterDto);
+        ResponseDto responseDto = new ResponseDto();
         chapterService.save(chapterDto);
-        return chapterDto;
+        responseDto.setContent(chapterDto);
+        return responseDto;
     }
 }
