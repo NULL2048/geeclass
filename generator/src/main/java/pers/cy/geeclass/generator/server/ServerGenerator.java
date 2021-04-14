@@ -15,19 +15,23 @@ import java.util.*;
 public class ServerGenerator {
     static String MODULE = "business";
     static String toDtoPath = "server\\src\\main\\java\\com\\course\\server\\dto\\";
-    static String toServicePath = "server\\src\\main\\java\\com\\course\\server\\service\\";
+    static String toServicePath = "server\\src\\main\\java\\pers\\cy\\geeclass\\server\\service\\";
     static String toControllerPath = MODULE + "\\src\\main\\java\\com\\course\\" + MODULE + "\\controller\\admin\\";
     static String generatorConfigPath = "server\\src\\main\\resources\\generator\\generatorConfig.xml";
 
-    static String toPath = "generator\\src\\main\\java\\pers\\cy\\geeclass\\generator\\test\\";
 
 
     public static void main(String[] args) throws Exception {
+        String Domain = "Section";
+        String domain = "section";
+        Map<String, Object> map = new HashMap<>();
+        map.put("Domain", Domain);
+        map.put("domain", domain);
 
         // 加载模板
-        FreemarkerUtil.initConfig("test.ftl");
+        FreemarkerUtil.initConfig("service.ftl");
         // 生成代码
-        FreemarkerUtil.generator(toPath + "Test.java");
+        FreemarkerUtil.generator(toServicePath + Domain + "Service.java", map);
 //        String module = MODULE;
 //
 //        // 只生成配置文件中的第一个table节点

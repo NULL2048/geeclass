@@ -1,0 +1,91 @@
+package pers.cy.geeclass.server.service;
+
+import com.fasterxml.jackson.databind.util.BeanUtil;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import org.springframework.beans.BeanUtils;
+import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import pers.cy.geeclass.server.domain.Section;
+import pers.cy.geeclass.server.domain.SectionExample;
+import pers.cy.geeclass.server.dto.SectionDto;
+import pers.cy.geeclass.server.dto.PageDto;
+import pers.cy.geeclass.server.mapper.SectionMapper;
+import pers.cy.geeclass.server.util.CopyUtil;
+import pers.cy.geeclass.server.util.UuidUtil;
+
+import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
+
+@Service
+public class SectionService {
+
+    @Resource
+    private SectionMapper sectionMapper;
+
+    /**
+     * 列表查询
+     * @param pageDto
+     */
+    public void list(PageDto pageDto) {
+        // 查找第一页，每一页有一条数据
+        PageHelper.startPage(pageDto.getPage(), pageDto.getSize());
+        SectionExample sectionExample = new SectionExample();
+
+        // 相当于一个where条件  下面这个表示查找id字段为1的数据
+        // sectionExample.createCriteria().andIdEqualTo("1");
+
+        // 设置排序
+        // sectionExample.setOrderByClause("id asc");
+
+        List<Section> sectionList = sectionMapper.selectByExample(sectionExample);
+        PageInfo pageInfo = new PageInfo<>(sectionList);
+        pageDto.setTotal(pageInfo.getTotal());
+        List<SectionDto> sectionDtoList = new ArrayList<SectionDto>();
+
+        for (int i = 0, l = sectionList.size(); i < l ; i++) {
+            Section section = sectionList.get(i);
+            SectionDto sectionDto = new SectionDto();
+            BeanUtils.copyProperties(section, sectionDto);
+            sectionDtoList.add(sectionDto);
+        }
+        pageDto.setList(sectionDtoList);
+    }
+
+    /**
+     * 添加课程
+     * 保存，id有值时更新，无值时新增
+     */
+    public void save(SectionDto sectionDto) {
+        Section section = CopyUtil.copy(sectionDto, Section.class);
+        if (StringUtils.isEmpty(sectionDto.getId())) {
+            this.insert(section);
+        } else {
+            this.update(section);
+        }
+    }
+
+    /**
+     * 新增
+     */
+    private void insert(Section section) {
+        section.setId(UuidUtil.getShortUuid());
+        sectionMapper.insert(section);
+    }
+
+    /**
+     * 更新
+     */
+    private void update(Section section) {
+        sectionMapper.updateByPrimaryKey(section);
+    }
+
+    /**
+     * 删除
+     */
+    public void delete(String id) {
+        sectionMapper.deleteByPrimaryKey(id);
+    }
+
+}
