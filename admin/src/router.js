@@ -4,6 +4,7 @@ import Login from "./views/login.vue"
 import Admin from "./views/admin.vue" // Admin主键名对应的页面是admin.vue
 import Welcome from "./views/admin/welcome.vue"
 import Chapter from "./views/admin/chapter.vue"
+import Section from "./views/admin/section.vue"
 
 Vue.use(Router);
 
@@ -31,6 +32,10 @@ export default new Router({
             path: "business/chapter", // 子路由设置不能加斜杠
             name: "business/chapter",
             component: Chapter,
+        },{
+            path: "business/section", // 子路由设置不能加斜杠
+            name: "business/section",
+            component: Section,
         }]
     }]
 })
