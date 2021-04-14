@@ -16,7 +16,8 @@ public class ServerGenerator {
     static String MODULE = "business";
     static String toDtoPath = "server\\src\\main\\java\\com\\course\\server\\dto\\";
     static String toServicePath = "server\\src\\main\\java\\pers\\cy\\geeclass\\server\\service\\";
-    static String toControllerPath = MODULE + "\\src\\main\\java\\com\\course\\" + MODULE + "\\controller\\admin\\";
+//    static String toControllerPath = MODULE + "\\src\\main\\java\\com\\course\\" + MODULE + "\\controller\\admin\\";
+    static String toControllerPath = "business\\src\\main\\java\\pers\\cy\\geeclass\\business\\controller\\admin\\";
     static String generatorConfigPath = "server\\src\\main\\resources\\generator\\generatorConfig.xml";
 
 
@@ -28,10 +29,18 @@ public class ServerGenerator {
         map.put("Domain", Domain);
         map.put("domain", domain);
 
+        // 生成service
         // 加载模板
         FreemarkerUtil.initConfig("service.ftl");
         // 生成代码
         FreemarkerUtil.generator(toServicePath + Domain + "Service.java", map);
+
+        // 生成controller
+        FreemarkerUtil.initConfig("controller.ftl");
+        FreemarkerUtil.generator(toControllerPath + Domain + "Controller.java", map);
+
+
+
 //        String module = MODULE;
 //
 //        // 只生成配置文件中的第一个table节点
