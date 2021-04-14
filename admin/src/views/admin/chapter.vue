@@ -160,7 +160,7 @@ export default {
       // 向接口做了一个list请求
       // 这个是从前端localhost访问127.0.0.1的后端访问路径，会出现跨域问题，所以这里需要解决跨域问题
       // 这里请求直接到路由网关中，再由网关进行转发
-      _this.$ajax.post('http://127.0.0.1:9000/business/admin/chapter/list', {
+      _this.$ajax.post(process.env.VUE_APP_SERVER + '/business/admin/chapter/list', {
         page: page,
         size: _this.$refs.pagination.size,
       }).then((response) => {
@@ -185,7 +185,7 @@ export default {
       }
 
       Loading.show();
-      _this.$ajax.post('http://127.0.0.1:9000/business/admin/chapter/save', _this.chapter).then((response) => {
+      _this.$ajax.post(process.env.VUE_APP_SERVER + '/business/admin/chapter/save', _this.chapter).then((response) => {
         Loading.hide();
         let resp = response.data;
         if (resp.success) {
@@ -205,7 +205,7 @@ export default {
       let _this = this;
       Confirm.show("删除大章后不可恢复，确认删除？", function (){
         Loading.show();
-        _this.$ajax.delete('http://127.0.0.1:9000/business/admin/chapter/delete/' + id).then((response) => {
+        _this.$ajax.delete(process.env.VUE_APP_SERVER + '/business/admin/chapter/delete/' + id).then((response) => {
           Loading.hide();
           let resp = response.data;
           if (resp.success) {
