@@ -160,7 +160,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 
-			<!-- mybatis generator 自动生成代码插件 -->
+			<!-- mybatis generator 自动生成代码插件 自动生成持久层代码-->
 			<plugin>
 				<groupId>org.mybatis.generator</groupId>
 				<artifactId>mybatis-generator-maven-plugin</artifactId>
