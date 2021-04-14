@@ -17,6 +17,7 @@ import pers.cy.geeclass.server.util.UuidUtil;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
+        import java.util.Date;
 
 @Service
 public class SectionService {
@@ -32,13 +33,7 @@ public class SectionService {
         // 查找第一页，每一页有一条数据
         PageHelper.startPage(pageDto.getPage(), pageDto.getSize());
         SectionExample sectionExample = new SectionExample();
-
-        // 相当于一个where条件  下面这个表示查找id字段为1的数据
-        // sectionExample.createCriteria().andIdEqualTo("1");
-
-        // 设置排序
-        // sectionExample.setOrderByClause("id asc");
-
+        sectionExample.setOrderByClause("sort asc");
         List<Section> sectionList = sectionMapper.selectByExample(sectionExample);
         PageInfo pageInfo = new PageInfo<>(sectionList);
         pageDto.setTotal(pageInfo.getTotal());
@@ -70,6 +65,10 @@ public class SectionService {
      * 新增
      */
     private void insert(Section section) {
+        Date now = new Date();
+        section.setCreatedAt(now);
+        section.setUpdatedAt(now);
+
         section.setId(UuidUtil.getShortUuid());
         sectionMapper.insert(section);
     }
@@ -78,6 +77,7 @@ public class SectionService {
      * 更新
      */
     private void update(Section section) {
+        section.setUpdatedAt(new Date());
         sectionMapper.updateByPrimaryKey(section);
     }
 

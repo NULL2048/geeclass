@@ -17,9 +17,9 @@
       <thead>
       <tr>
         <#list fieldList as field>
-        <#--               <#if field.nameHump!="createdAt" && field.nameHump!="updatedAt">-->
-          <th>${field.nameCn}</th>
-        <#--               </#if>-->
+          <#if field.nameHump!="createdAt" && field.nameHump!="updatedAt">
+            <th>${field.nameCn}</th>
+          </#if>
         </#list>
         <th>操作</th>
       </tr>
@@ -28,13 +28,13 @@
       <tbody>
       <tr v-for="${domain} in ${domain}s">
         <#list fieldList as field>
-        <#--                    <#if field.nameHump!="createdAt" && field.nameHump!="updatedAt">-->
+          <#if field.nameHump!="createdAt" && field.nameHump!="updatedAt">
         <#--                        <#if field.enums>-->
         <#--                            <td>{{${field.enumsConst} | optionKV(${domain}.${field.nameHump})}}</td>-->
         <#--                        <#else>-->
-          <td>{{${domain}.${field.nameHump}}}</td>
+            <td>{{${domain}.${field.nameHump}}}</td>
         <#--                        </#if>-->
-        <#--                    </#if>-->
+          </#if>
         </#list>
 
         <td>
@@ -97,7 +97,7 @@
           <div class="modal-body">
             <form class="form-horizontal">
               <#list fieldList as field>
-              <#--                                <#if field.name!="id" && field.nameHump!="createdAt" && field.nameHump!="updatedAt">-->
+                <#if field.name!="id" && field.nameHump!="createdAt" && field.nameHump!="updatedAt">
               <#--                                    <#if field.enums>-->
                 <div class="form-group">
                   <label class="col-sm-2 control-label">${field.nameCn}</label>
@@ -116,7 +116,7 @@
               <#--                                            </div>-->
               <#--                                        </div>-->
               <#--                                    </#if>-->
-              <#--                                </#if>-->
+                </#if>
               </#list>
             </form>
           </div>
@@ -198,14 +198,14 @@
         // 保存校验
         if (1 != 1
         <#list fieldList as field>
-<#--          <#if field.name!="id" && field.nameHump!="createdAt" && field.nameHump!="updatedAt" && field.nameHump!="sort">-->
+          <#if field.name!="id" && field.nameHump!="createdAt" && field.nameHump!="updatedAt" && field.nameHump!="sort">
                 <#if !field.nullAble>
                 || !Validator.require(_this.${domain}.${field.nameHump}, "${field.nameCn}")
                 </#if>
                 <#if (field.length > 0)>
                 || !Validator.length(_this.${domain}.${field.nameHump}, "${field.nameCn}", 1, ${field.length})
                 </#if>
-<#--                </#if>-->
+          </#if>
         </#list>
         ) {
           return;

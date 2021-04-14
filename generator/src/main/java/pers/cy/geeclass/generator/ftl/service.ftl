@@ -17,6 +17,11 @@ import pers.cy.geeclass.server.util.UuidUtil;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
+<#list typeSet as type>
+    <#if type=='Date'>
+        import java.util.Date;
+    </#if>
+</#list>
 
 @Service
 public class ${Domain}Service {
@@ -33,11 +38,11 @@ public class ${Domain}Service {
         PageHelper.startPage(pageDto.getPage(), pageDto.getSize());
         ${Domain}Example ${domain}Example = new ${Domain}Example();
 
-        // 相当于一个where条件  下面这个表示查找id字段为1的数据
-        // ${domain}Example.createCriteria().andIdEqualTo("1");
-
-        // 设置排序
-        // ${domain}Example.setOrderByClause("id asc");
+        <#list fieldList as field>
+            <#if field.nameHump=='sort'>
+                ${domain}Example.setOrderByClause("sort asc");
+            </#if>
+        </#list>
 
         List<${Domain}> ${domain}List = ${domain}Mapper.selectByExample(${domain}Example);
         PageInfo pageInfo = new PageInfo<>(${domain}List);
@@ -70,6 +75,20 @@ public class ${Domain}Service {
      * 新增
      */
     private void insert(${Domain} ${domain}) {
+<#--        <#list typeSet as type>-->
+<#--            <#if type=='Date'>-->
+                Date now = new Date();
+<#--            </#if>-->
+<#--        </#list>-->
+        <#list fieldList as field>
+            <#if field.nameHump=='createdAt'>
+                ${domain}.setCreatedAt(now);
+            </#if>
+            <#if field.nameHump=='updatedAt'>
+                ${domain}.setUpdatedAt(now);
+            </#if>
+        </#list>
+
         ${domain}.setId(UuidUtil.getShortUuid());
         ${domain}Mapper.insert(${domain});
     }
@@ -78,6 +97,11 @@ public class ${Domain}Service {
      * 更新
      */
     private void update(${Domain} ${domain}) {
+        <#list fieldList as field>
+            <#if field.nameHump=='updatedAt'>
+                ${domain}.setUpdatedAt(new Date());
+            </#if>
+        </#list>
         ${domain}Mapper.updateByPrimaryKey(${domain});
     }
 
