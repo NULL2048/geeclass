@@ -9,7 +9,8 @@
 		<module>gateway</module>
 		<module>server</module>
         <module>business</module>
-    </modules>
+		<module>generator</module>
+	</modules>
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
