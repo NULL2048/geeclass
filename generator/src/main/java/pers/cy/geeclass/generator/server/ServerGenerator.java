@@ -16,8 +16,7 @@ public class ServerGenerator {
     static String MODULE = "business";
     static String toDtoPath = "server\\src\\main\\java\\com\\course\\server\\dto\\";
     static String toServicePath = "server\\src\\main\\java\\pers\\cy\\geeclass\\server\\service\\";
-//    static String toControllerPath = MODULE + "\\src\\main\\java\\com\\course\\" + MODULE + "\\controller\\admin\\";
-    static String toControllerPath = "business\\src\\main\\java\\pers\\cy\\geeclass\\business\\controller\\admin\\";
+    static String toControllerPath = MODULE + "\\src\\main\\java\\pers\\cy\\geeclass\\" + MODULE + "\\controller\\admin\\";
     static String generatorConfigPath = "server\\src\\main\\resources\\generator\\generatorConfig.xml";
 
 
@@ -25,9 +24,13 @@ public class ServerGenerator {
     public static void main(String[] args) throws Exception {
         String Domain = "Section";
         String domain = "section";
+        String tableNameCn = "小节";
+        String module = MODULE;
         Map<String, Object> map = new HashMap<>();
         map.put("Domain", Domain);
         map.put("domain", domain);
+        map.put("tableNameCn", tableNameCn);
+        map.put("module", module);
 
         // 生成service
         // 加载模板
