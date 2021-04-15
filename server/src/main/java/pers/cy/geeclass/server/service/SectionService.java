@@ -10,6 +10,7 @@ import pers.cy.geeclass.server.domain.Section;
 import pers.cy.geeclass.server.domain.SectionExample;
 import pers.cy.geeclass.server.dto.SectionDto;
 import pers.cy.geeclass.server.dto.PageDto;
+import pers.cy.geeclass.server.enums.SectionChargeEnum;
 import pers.cy.geeclass.server.mapper.SectionMapper;
 import pers.cy.geeclass.server.util.CopyUtil;
 import pers.cy.geeclass.server.util.UuidUtil;
@@ -70,6 +71,7 @@ public class SectionService {
         section.setUpdatedAt(now);
 
         section.setId(UuidUtil.getShortUuid());
+        section.setCharge(SectionChargeEnum.CHARGE.getCode());
         sectionMapper.insert(section);
     }
 
