@@ -16,34 +16,42 @@
     <table id="simple-table" class="table  table-bordered table-hover">
       <thead>
       <tr>
-        <#list fieldList as field>
-          <#if field.nameHump!="createdAt" && field.nameHump!="updatedAt">
-            <th>${field.nameCn}</th>
-          </#if>
-        </#list>
+                    <th>id</th>
+            <th>名称</th>
+            <th>概述</th>
+            <th>时长</th>
+            <th>价格（元）</th>
+            <th>封面</th>
+            <th>级别</th>
+            <th>收费</th>
+            <th>状态</th>
+            <th>报名数</th>
+            <th>顺序</th>
         <th>操作</th>
       </tr>
       </thead>
 
       <tbody>
-      <tr v-for="${domain} in ${domain}s">
-        <#list fieldList as field>
-          <#if field.nameHump!="createdAt" && field.nameHump!="updatedAt">
-        <#--                        <#if field.enums>-->
-        <#--                            <td>{{${field.enumsConst} | optionKV(${domain}.${field.nameHump})}}</td>-->
-        <#--                        <#else>-->
-            <td>{{${domain}.${field.nameHump}}}</td>
-        <#--                        </#if>-->
-          </#if>
-        </#list>
+      <tr v-for="course in courses">
+            <td>{{course.id}}</td>
+            <td>{{course.name}}</td>
+            <td>{{course.summary}}</td>
+            <td>{{course.time}}</td>
+            <td>{{course.price}}</td>
+            <td>{{course.image}}</td>
+            <td>{{COURSE_LEVEL | optionKV(course.level)}}</td>
+            <td>{{COURSE_CHARGE | optionKV(course.charge)}}</td>
+            <td>{{COURSE_STATUS | optionKV(course.status)}}</td>
+            <td>{{course.enroll}}</td>
+            <td>{{course.sort}}</td>
 
         <td>
           <div class="hidden-sm hidden-xs btn-group">
-            <button v-on:click="edit(${domain})" class="btn btn-xs btn-info">
+            <button v-on:click="edit(course)" class="btn btn-xs btn-info">
               <i class="ace-icon fa fa-pencil bigger-120"></i>
             </button>
 
-            <button v-on:click="del(${domain}.id)" class="btn btn-xs btn-danger">
+            <button v-on:click="del(course.id)" class="btn btn-xs btn-danger">
               <i class="ace-icon fa fa-trash-o bigger-120"></i>
             </button>
           </div>
@@ -96,28 +104,72 @@
           </div>
           <div class="modal-body">
             <form class="form-horizontal">
-              <#list fieldList as field>
-                <#if field.name!="id" && field.nameHump!="createdAt" && field.nameHump!="updatedAt">
-              <#--                                    <#if field.enums>-->
                 <div class="form-group">
-                  <label class="col-sm-2 control-label">${field.nameCn}</label>
+                  <label class="col-sm-2 control-label">名称</label>
                   <div class="col-sm-10">
-                    <input v-model="${domain}.${field.nameHump}" class="form-control">
-                    <#--                                                <select v-model="${domain}.${field.nameHump}" class="form-control">-->
-                    <#--                                                    <option v-for="o in ${field.enumsConst}" v-bind:value="o.key">{{o.value}}</option>-->
-                    <#--                                                </select>-->
+                    <input v-model="course.name" class="form-control">
                   </div>
                 </div>
-              <#--                                    <#else>-->
-              <#--                                        <div class="form-group">-->
-              <#--                                            <label class="col-sm-2 control-label">${field.nameCn}</label>-->
-              <#--                                            <div class="col-sm-10">-->
-              <#--                                                <input v-model="${domain}.${field.nameHump}" class="form-control">-->
-              <#--                                            </div>-->
-              <#--                                        </div>-->
-              <#--                                    </#if>-->
-                </#if>
-              </#list>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">概述</label>
+                  <div class="col-sm-10">
+                    <input v-model="course.summary" class="form-control">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">时长</label>
+                  <div class="col-sm-10">
+                    <input v-model="course.time" class="form-control">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">价格（元）</label>
+                  <div class="col-sm-10">
+                    <input v-model="course.price" class="form-control">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">封面</label>
+                  <div class="col-sm-10">
+                    <input v-model="course.image" class="form-control">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">级别</label>
+                  <div class="col-sm-10">
+                    <select v-model="course.level" class="form-control">
+                      <option v-for="o in COURSE_LEVEL" v-bind:value="o.key">{{o.value}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">收费</label>
+                  <div class="col-sm-10">
+                    <select v-model="course.charge" class="form-control">
+                      <option v-for="o in COURSE_CHARGE" v-bind:value="o.key">{{o.value}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">状态</label>
+                  <div class="col-sm-10">
+                    <select v-model="course.status" class="form-control">
+                      <option v-for="o in COURSE_STATUS" v-bind:value="o.key">{{o.value}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">报名数</label>
+                  <div class="col-sm-10">
+                    <input v-model="course.enroll" class="form-control">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">顺序</label>
+                  <div class="col-sm-10">
+                    <input v-model="course.sort" class="form-control">
+                  </div>
+                </div>
             </form>
           </div>
           <div class="modal-footer">
@@ -134,12 +186,15 @@
   import Pagination from "../../components/pagination";
 
   export default {
-    name: '${module}-${domain}',
+    name: 'business-course',
     components: {Pagination},
     data: function () {
       return {
-        ${domain}: {},
-        ${domain}s: []
+        course: {},
+        courses: [],
+        COURSE_LEVEL: COURSE_LEVEL,
+        COURSE_CHARGE: COURSE_CHARGE,
+        COURSE_STATUS: COURSE_STATUS
       }
     },
     mounted: function () {
@@ -147,7 +202,7 @@
       _this.$refs.pagination.size = 5;
       // 页面初始化之后就自动去执行下面的list方法
       _this.list(1);
-      // this.$parent.activeSidebar("${module}-${domain}-sidebar");
+      // this.$parent.activeSidebar("business-course-sidebar");
     },
     methods: {
       /**
@@ -155,16 +210,16 @@
        */
       add() {
         let _this = this;
-        _this.${domain} = {};
+        _this.course = {};
         $("#form-modal").modal("show");
       },
 
       /**
        * 点击【编辑】
        */
-      edit(${domain}) {
+      edit(course) {
         let _this = this;
-        _this.${domain} = $.extend({}, ${domain});
+        _this.course = $.extend({}, course);
         $("#form-modal").modal("show");
       },
 
@@ -178,13 +233,13 @@
         // 向接口做了一个list请求
         // 这个是从前端localhost访问127.0.0.1的后端访问路径，会出现跨域问题，所以这里需要解决跨域问题
         // 这里请求直接到路由网关中，再由网关进行转发
-        _this.$ajax.post(process.env.VUE_APP_SERVER + '/${module}/admin/${domain}/list', {
+        _this.$ajax.post(process.env.VUE_APP_SERVER + '/business/admin/course/list', {
           page: page,
           size: _this.$refs.pagination.size,
         }).then((response) => {
           Loading.hide();
           let resp = response.data;
-          _this.${domain}s = resp.content.list;
+          _this.courses = resp.content.list;
           _this.$refs.pagination.render(page, resp.content.total);
         })
       },
@@ -197,22 +252,17 @@
 
         // 保存校验
         if (1 != 1
-        <#list fieldList as field>
-          <#if field.name!="id" && field.nameHump!="createdAt" && field.nameHump!="updatedAt" && field.nameHump!="sort">
-                <#if !field.nullAble>
-                || !Validator.require(_this.${domain}.${field.nameHump}, "${field.nameCn}")
-                </#if>
-                <#if (field.length > 0)>
-                || !Validator.length(_this.${domain}.${field.nameHump}, "${field.nameCn}", 1, ${field.length?c})
-                </#if>
-          </#if>
-        </#list>
+                || !Validator.require(_this.course.name, "名称")
+                || !Validator.length(_this.course.name, "名称", 1, 50)
+                || !Validator.length(_this.course.summary, "概述", 1, 2000)
+                || !Validator.length(_this.course.image, "封面", 1, 100)
+                || !Validator.require(_this.course.level, "级别")
         ) {
           return;
         }
 
         Loading.show();
-        _this.$ajax.post(process.env.VUE_APP_SERVER + '/${module}/admin/${domain}/save', _this.${domain}).then((response) => {
+        _this.$ajax.post(process.env.VUE_APP_SERVER + '/business/admin/course/save', _this.course).then((response) => {
           Loading.hide();
           let resp = response.data;
           if (resp.success) {
@@ -230,9 +280,9 @@
        */
       del(id) {
         let _this = this;
-        Confirm.show("删除${tableNameCn}后不可恢复，确认删除？", function (){
+        Confirm.show("删除课程后不可恢复，确认删除？", function (){
           Loading.show();
-          _this.$ajax.delete(process.env.VUE_APP_SERVER + '/${module}/admin/${domain}/delete/' + id).then((response) => {
+          _this.$ajax.delete(process.env.VUE_APP_SERVER + '/business/admin/course/delete/' + id).then((response) => {
             Loading.hide();
             let resp = response.data;
             if (resp.success) {
