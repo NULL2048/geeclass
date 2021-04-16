@@ -40,7 +40,7 @@
             <td>{{section.courseId}}</td>
             <td>{{section.chapterId}}</td>
             <td>{{section.video}}</td>
-            <td>{{section.time}}</td>
+            <td>{{section.time | formatSecond}}</td>
             <td>{{SECTION_CHARGE | optionKV(section.charge)}}</td>
             <td>{{section.sort}}</td>
 
