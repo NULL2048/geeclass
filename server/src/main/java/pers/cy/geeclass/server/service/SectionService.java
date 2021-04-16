@@ -10,6 +10,7 @@ import pers.cy.geeclass.server.domain.Section;
 import pers.cy.geeclass.server.domain.SectionExample;
 import pers.cy.geeclass.server.dto.SectionDto;
 import pers.cy.geeclass.server.dto.PageDto;
+import pers.cy.geeclass.server.dto.SectionPageDto;
 import pers.cy.geeclass.server.enums.SectionChargeEnum;
 import pers.cy.geeclass.server.mapper.SectionMapper;
 import pers.cy.geeclass.server.util.CopyUtil;
@@ -28,16 +29,26 @@ public class SectionService {
 
     /**
      * 列表查询
-     * @param pageDto
+     * @param sectionPageDto
      */
-    public void list(PageDto pageDto) {
+    public void list(SectionPageDto sectionPageDto) {
         // 查找第一页，每一页有一条数据
-        PageHelper.startPage(pageDto.getPage(), pageDto.getSize());
+        PageHelper.startPage(sectionPageDto.getPage(), sectionPageDto.getSize());
         SectionExample sectionExample = new SectionExample();
+
+        SectionExample.Criteria criteria = sectionExample.createCriteria();
+        if (!StringUtils.isEmpty(sectionPageDto.getCourseId())) {
+            criteria.andCourseIdEqualTo(sectionPageDto.getCourseId());
+        }
+        if (!StringUtils.isEmpty(sectionPageDto.getChapterId())) {
+            criteria.andChapterIdEqualTo(sectionPageDto.getChapterId());
+        }
+
+
         sectionExample.setOrderByClause("sort asc");
         List<Section> sectionList = sectionMapper.selectByExample(sectionExample);
         PageInfo pageInfo = new PageInfo<>(sectionList);
-        pageDto.setTotal(pageInfo.getTotal());
+        sectionPageDto.setTotal(pageInfo.getTotal());
         List<SectionDto> sectionDtoList = new ArrayList<SectionDto>();
 
         for (int i = 0, l = sectionList.size(); i < l ; i++) {
@@ -46,7 +57,7 @@ public class SectionService {
             BeanUtils.copyProperties(section, sectionDto);
             sectionDtoList.add(sectionDto);
         }
-        pageDto.setList(sectionDtoList);
+        sectionPageDto.setList(sectionDtoList);
     }
 
     /**

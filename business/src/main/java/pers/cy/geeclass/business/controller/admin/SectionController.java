@@ -7,6 +7,7 @@ import pers.cy.geeclass.server.domain.Section;
 import pers.cy.geeclass.server.dto.SectionDto;
 import pers.cy.geeclass.server.dto.PageDto;
 import pers.cy.geeclass.server.dto.ResponseDto;
+import pers.cy.geeclass.server.dto.SectionPageDto;
 import pers.cy.geeclass.server.service.SectionService;
 import pers.cy.geeclass.server.util.ValidatorUtil;
 
@@ -25,14 +26,16 @@ public class SectionController {
 
     /**
      * 列表查询
-     * @param pageDto
+     * @param sectionPageDto
      * @return
      */
     @PostMapping("/list")
-    public ResponseDto list(@RequestBody PageDto pageDto) {
+    public ResponseDto list(@RequestBody SectionPageDto sectionPageDto) {
         ResponseDto responseDto = new ResponseDto();
-        sectionService.list(pageDto);
-        responseDto.setContent(pageDto);
+        ValidatorUtil.require(sectionPageDto.getCourseId(), "课程ID");
+        ValidatorUtil.require(sectionPageDto.getChapterId(), "大章ID");
+        sectionService.list(sectionPageDto);
+        responseDto.setContent(sectionPageDto);
         return responseDto;
     }
 
