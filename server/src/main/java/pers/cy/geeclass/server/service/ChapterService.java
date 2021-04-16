@@ -9,6 +9,7 @@ import org.springframework.util.StringUtils;
 import pers.cy.geeclass.server.domain.Chapter;
 import pers.cy.geeclass.server.domain.ChapterExample;
 import pers.cy.geeclass.server.dto.ChapterDto;
+import pers.cy.geeclass.server.dto.ChapterPageDto;
 import pers.cy.geeclass.server.dto.PageDto;
 import pers.cy.geeclass.server.mapper.ChapterMapper;
 import pers.cy.geeclass.server.util.CopyUtil;
@@ -26,12 +27,18 @@ public class ChapterService {
 
     /**
      * 列表查询
-     * @param pageDto
+     * @param chapterPageDto
      */
-    public void list(PageDto pageDto) {
+    public void list(ChapterPageDto chapterPageDto) {
         // 查找第一页，每一页有一条数据
-        PageHelper.startPage(pageDto.getPage(), pageDto.getSize());
+        PageHelper.startPage(chapterPageDto.getPage(), chapterPageDto.getSize());
         ChapterExample chapterExample = new ChapterExample();
+        ChapterExample.Criteria criteria = chapterExample.createCriteria();
+        if (!StringUtils.isEmpty(chapterPageDto.getCourseId())) {
+            criteria.andCourseIdEqualTo(chapterPageDto.getCourseId());
+
+            //criteria.andCourseIdEqualTo(chapterPageDto.getCourseId());
+        }
 
         // 相当于一个where条件  下面这个表示查找id字段为1的数据
         // chapterExample.createCriteria().andIdEqualTo("1");
@@ -41,7 +48,7 @@ public class ChapterService {
 
         List<Chapter> chapterList = chapterMapper.selectByExample(chapterExample);
         PageInfo pageInfo = new PageInfo<>(chapterList);
-        pageDto.setTotal(pageInfo.getTotal());
+        chapterPageDto.setTotal(pageInfo.getTotal());
         List<ChapterDto> chapterDtoList = new ArrayList<ChapterDto>();
 
         for (int i = 0, l = chapterList.size(); i < l ; i++) {
@@ -50,7 +57,7 @@ public class ChapterService {
             BeanUtils.copyProperties(chapter, chapterDto);
             chapterDtoList.add(chapterDto);
         }
-        pageDto.setList(chapterDtoList);
+        chapterPageDto.setList(chapterDtoList);
     }
 
     /**
