@@ -75,11 +75,11 @@ public class ${Domain}Service {
      * 新增
      */
     private void insert(${Domain} ${domain}) {
-<#--        <#list typeSet as type>-->
-<#--            <#if type=='Date'>-->
+        <#list typeSet as type>
+            <#if type=='Date'>
                 Date now = new Date();
-<#--            </#if>-->
-<#--        </#list>-->
+            </#if>
+        </#list>
         <#list fieldList as field>
             <#if field.nameHump=='createdAt'>
                 ${domain}.setCreatedAt(now);
