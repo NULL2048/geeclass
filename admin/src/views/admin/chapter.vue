@@ -1,6 +1,12 @@
 <template>
   <div>
+    <h3>{{course.name}}}</h3>
     <p>
+      <router-link to="/business/course" class="btn btn-white btn-default btn-round">
+        <i class="ace-icon fa fa-arrow-left"></i>
+        返回课程
+      </router-link>
+      &nbsp;
       <button v-on:click="add()" class="btn btn-white btn-default btn-round">
         <i class="ace-icon fa fa-edit"></i>
         新增
@@ -121,12 +127,20 @@ export default {
   data: function () {
     return {
       chapter: {},
-      chapters: []
+      chapters: [],
+      course: {},
     }
   },
   mounted: function () {
     let _this = this;
     _this.$refs.pagination.size = 5;
+    let course = SessionStorage.get(SESSION_KEY_COURSE) || {};
+    // let course = SessionStorage.get("course") || {};
+    if (Tool.isEmpty(course)) {
+      _this.$router.push("/welcome");
+    }
+
+    _this.course = course;
     // 页面初始化之后就自动去执行下面的list方法
     _this.list(1);
     // this.$parent.activeSidebar("business-chapter-sidebar");
