@@ -31,6 +31,9 @@ public class CourseService {
     private CourseMapper courseMapper;
 
     @Resource
+    private CourseCategoryService courseCategoryService;
+
+    @Resource
     private MyCourseMapper myCourseMapper;
     /**
      * 列表查询
@@ -68,6 +71,9 @@ public class CourseService {
         } else {
             this.update(course);
         }
+
+        // 批量保存课程分类
+        courseCategoryService.saveBatch(course.getId(), courseDto.getCategorys());
     }
 
     /**

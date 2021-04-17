@@ -90,5 +90,12 @@ insert into category(id, parent, name, sort) value ('00000204', '00000200', 'ssm
 insert into category(id, parent, name, sort) value ('00000205', '00000200', 'python', 205);
 insert into category(id, parent, name, sort) value ('00000206', '00000200', '爬虫', 206);
 
-
+-- 课程分类
+drop table if exists course_category;
+create table course_category (
+    id char(8) not null default '' comment 'id',
+    course_id char(8) comment '课程|course.id',
+    category_id char(8) comment '分类|course.id',
+    primary key(id)
+) engine=innodb default charset=utf8mb4 comment='课程分类';
 
