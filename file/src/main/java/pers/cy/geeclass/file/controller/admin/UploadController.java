@@ -25,15 +25,15 @@ public class UploadController {
     private static final Logger LOG = LoggerFactory.getLogger(UploadController.class);
 
     public static final String BUSINESS_NAME = "文件上传";
-//
-//    @Value("${file.domain}")
-//    private String FILE_DOMAIN;
+
+    @Value("${file.domain}")
+    private String FILE_DOMAIN;
 //
 //    @Value("${oss.domain}")
 //    private String OSS_DOMAIN;
 //
-//    @Value("${file.path}")
-//    private String FILE_PATH;
+    @Value("${file.path}")
+    private String FILE_PATH;
 //
 //    @Value("${vod.accessKeyId}")
 //    private String accessKeyId;
@@ -53,13 +53,13 @@ public class UploadController {
         // 保存文件到本地
         String fileName = file.getOriginalFilename();
         String key = UuidUtil.getShortUuid();
-        String fullPath = "C:/Users/97307/Desktop/geeclass/course/teacher/" + key + "-" + fileName;
+        String fullPath = FILE_PATH + "teacher/" + key + "-" + fileName;
         File dest = new File(fullPath);
         file.transferTo(dest);
         LOG.info(dest.getAbsolutePath());
 
         ResponseDto responseDto = new ResponseDto();
-        responseDto.setContent("http://127.0.0.1:9000/file/f/teacher/" + key + "-" + fileName);
+        responseDto.setContent(FILE_DOMAIN + "f/teacher/" + key + "-" + fileName);
         return responseDto;
     }
 
