@@ -179,7 +179,12 @@
             <form class="form-horizontal">
               <div class="form-group">
                 <div class="col-lg-12">
-                  <div id="content"></div>
+                  {{saveContentLabel}}
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-lg-12">
+                  <div id='content'></div>
                 </div>
               </div>
             </form>
@@ -220,6 +225,7 @@
         COURSE_STATUS: COURSE_STATUS,
         categorys: [],
         tree: {},
+        saveContentLabel: "",
       }
     },
     mounted: function () {
@@ -406,6 +412,7 @@
 
         // 先清空历史文本
         $("#content").summernote('code', '');
+        _this.saveContentLabel = "";
         Loading.show();
         _this.$ajax.get(process.env.VUE_APP_SERVER + '/business/admin/course/find-content/' + id).then((respose)=>{
           Loading.hide();
@@ -416,6 +423,17 @@
             if (resp.content) {
               $("#content").summernote('code', resp.content.content);
             }
+
+            // 定时自动保存
+            let saveContentInterval = setInterval(function () {
+              _this.saveContent();
+            }, 5000);
+            // 关闭内容框时，清楚自动保存任务
+            $('#course-content-modal').on('hidden.bs.modal', function(e){
+              clearInterval(saveContentInterval);
+            })
+
+
           } else {
             Toast.warning(resp.message);
           }
@@ -434,7 +452,9 @@
           Loading.hide();
           let resp = response.data;
           if (resp.success) {
-            Toast.success("内容保存成功");
+            // Toast.success("内容保存成功");
+            let now = Tool.dateFormat("mm:ss");
+            _this.saveContentLabel = "最后保存时间：" + now;
           } else {
             Toast.warning(resp.message);
           }
