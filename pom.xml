@@ -10,7 +10,8 @@
 		<module>server</module>
         <module>business</module>
 		<module>generator</module>
-	</modules>
+        <module>file</module>
+    </modules>
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
