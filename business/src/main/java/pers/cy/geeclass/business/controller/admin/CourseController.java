@@ -4,9 +4,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 import pers.cy.geeclass.server.domain.Course;
+import pers.cy.geeclass.server.dto.CourseCategoryDto;
 import pers.cy.geeclass.server.dto.CourseDto;
 import pers.cy.geeclass.server.dto.PageDto;
 import pers.cy.geeclass.server.dto.ResponseDto;
+import pers.cy.geeclass.server.service.CourseCategoryService;
 import pers.cy.geeclass.server.service.CourseService;
 import pers.cy.geeclass.server.util.ValidatorUtil;
 
@@ -22,6 +24,9 @@ public class CourseController {
 
     @Resource
     private CourseService courseService;
+
+    @Resource
+    private CourseCategoryService courseCategoryService;
 
     /**
      * 列表查询
@@ -64,6 +69,18 @@ public class CourseController {
     public ResponseDto delete(@PathVariable String id) {
         ResponseDto responseDto = new ResponseDto();
         courseService.delete(id);
+        return responseDto;
+    }
+
+    /**
+     * 查找课程下所有分类
+     * @param courseId
+     */
+    @PostMapping("/list-category/{courseId}")
+    public ResponseDto listCategory(@PathVariable(value = "courseId") String courseId) {
+        ResponseDto responseDto = new ResponseDto();
+        List<CourseCategoryDto> dtoList = courseCategoryService.listByCourse(courseId);
+        responseDto.setContent(dtoList);
         return responseDto;
     }
 }
