@@ -4,10 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 import pers.cy.geeclass.server.domain.Course;
-import pers.cy.geeclass.server.dto.CourseCategoryDto;
-import pers.cy.geeclass.server.dto.CourseDto;
-import pers.cy.geeclass.server.dto.PageDto;
-import pers.cy.geeclass.server.dto.ResponseDto;
+import pers.cy.geeclass.server.dto.*;
 import pers.cy.geeclass.server.service.CourseCategoryService;
 import pers.cy.geeclass.server.service.CourseService;
 import pers.cy.geeclass.server.util.ValidatorUtil;
@@ -81,6 +78,21 @@ public class CourseController {
         ResponseDto responseDto = new ResponseDto();
         List<CourseCategoryDto> dtoList = courseCategoryService.listByCourse(courseId);
         responseDto.setContent(dtoList);
+        return responseDto;
+    }
+
+    @GetMapping("/find-content/{id}")
+    public ResponseDto findContent(@PathVariable String id) {
+        ResponseDto responseDto = new ResponseDto();
+        CourseContentDto contentDto = courseService.findContent(id);
+        responseDto.setContent(contentDto);
+        return responseDto;
+    }
+
+    @PostMapping("/save-content")
+    public ResponseDto saveContent(@RequestBody CourseContentDto contentDto) {
+        ResponseDto responseDto = new ResponseDto();
+        courseService.saveContent(contentDto);
         return responseDto;
     }
 }
