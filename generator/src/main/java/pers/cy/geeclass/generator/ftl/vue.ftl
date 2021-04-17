@@ -198,7 +198,7 @@
       /**
        * 点击保存
        */
-      save(page) {
+      save() {
         let _this = this;
 
         // 保存校验
