@@ -26,7 +26,7 @@
         <td>{{file.path}}</td>
         <td>{{file.name}}</td>
         <td>{{file.suffix}}</td>
-        <td>{{file.size}}</td>
+        <td>{{file.size | formatFileSize}}</td>
         <td>{{FILE_USE | optionKV(file.use)}}</td>
 
       </tr>
