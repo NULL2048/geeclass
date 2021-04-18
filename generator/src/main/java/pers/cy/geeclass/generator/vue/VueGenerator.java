@@ -15,7 +15,7 @@ import java.util.*;
  * 使用freemarker
  */
 public class VueGenerator {
-    static String MODULE = "business";
+    static String MODULE = "file";
     static String toVuePath = "admin\\src\\views\\admin\\";
     static String generatorConfigPath = "server\\src\\main\\resources\\generator\\generatorConfig.xml";
 
