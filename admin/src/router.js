@@ -8,6 +8,7 @@ import Chapter from "./views/admin/chapter.vue"
 import Section from "./views/admin/section.vue"
 import Category from "./views/admin/category.vue"
 import Teacher from "./views/admin/teacher.vue"
+import Content from "./views/admin/content.vue"
 import File from "./views/admin/file.vue"
 
 Vue.use(Router);
@@ -48,6 +49,10 @@ export default new Router({
             path: "business/category", // 子路由设置不能加斜杠
             name: "business/category",
             component: Category,
+        },{
+            path: "business/content", // 子路由设置不能加斜杠
+            name: "business/content",
+            component: Content,
         },{
             path: "business/teacher", // 子路由设置不能加斜杠
             name: "business/teacher",
