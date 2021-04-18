@@ -70,9 +70,8 @@
       },
 
       selectFile () {
-        // let _this = this;
-        // $("#" + _this.inputId + "-input").trigger("click");
-        $("#file-upload-input").trigger("click");
+        let _this = this;
+        $("#" + _this.inputId + "-input").trigger("click");
 
       }
     }
