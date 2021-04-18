@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import pers.cy.geeclass.server.dto.FileDto;
 import pers.cy.geeclass.server.dto.ResponseDto;
+import pers.cy.geeclass.server.service.FileService;
 import pers.cy.geeclass.server.util.UuidUtil;
 
 import javax.annotation.Resource;
@@ -41,8 +43,8 @@ public class UploadController {
 //    @Value("${vod.accessKeySecret}")
 //    private String accessKeySecret;
 
-//    @Resource
-//    private FileService fileService;
+    @Resource
+    private FileService fileService;
 
     @RequestMapping("/upload")
     public ResponseDto upload(@RequestParam MultipartFile file) throws IOException {
@@ -51,15 +53,26 @@ public class UploadController {
         LOG.info(String.valueOf(file.getSize()));
 
         // 保存文件到本地
-        String fileName = file.getOriginalFilename();
         String key = UuidUtil.getShortUuid();
-        String fullPath = FILE_PATH + "teacher/" + key + "-" + fileName;
+        String fileName = file.getOriginalFilename();
+        String suffix = fileName.substring(fileName.lastIndexOf(".") + 1).toLowerCase();
+        String path = "teacher/" + key + "." + suffix;
+        String fullPath = FILE_PATH + path;
         File dest = new File(fullPath);
         file.transferTo(dest);
         LOG.info(dest.getAbsolutePath());
 
+        LOG.info("保存文件记录开始");
+        FileDto fileDto = new FileDto();
+        fileDto.setPath(path);
+        fileDto.setName(fileName);
+        fileDto.setSize(Math.toIntExact(file.getSize()));
+        fileDto.setSuffix(suffix);
+        fileDto.setUse("");
+        fileService.save(fileDto);
+
         ResponseDto responseDto = new ResponseDto();
-        responseDto.setContent(FILE_DOMAIN + "f/teacher/" + key + "-" + fileName);
+        responseDto.setContent(FILE_DOMAIN + path);
         return responseDto;
     }
 
