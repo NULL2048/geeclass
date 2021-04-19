@@ -34,7 +34,7 @@ export default {
     }
   },
   methods: {
-    uploadFile () {
+     uploadFile () {
       let _this = this;
       let formData = new window.FormData();
       let file = _this.$refs.file.files[0];
@@ -80,33 +80,31 @@ export default {
 
       // 文件分片
       let shardSize = 20 * 1024 * 1024;
-      let shardIndex = 2;
-      let start = (shardIndex - 1) * shardSize;
-      let end = Math.min(file.size, start + shardSize);
-      let fileShard = file.slice(start, end);
+      let shardIndex = 1;
       let size = file.size;
       let shardTotal = Math.ceil(size / shardSize); //总片数
 
+      let param = {
+        'shardIndex': shardIndex,
+        'shardSize': shardSize,
+        'shardTotal': shardTotal,
+        'use': _this.use,
+        'name': file.name,
+        'suffix': suffix,
+        'size': file.size,
+        'key': key62
+      };
 
-      // // key："file"必须和后端controller参数名一致
-      // formData.append('shard', fileShard);
-      // formData.append('shardIndex', shardIndex);
-      // formData.append('shardSize', shardSize);
-      // formData.append('shardTotal', shardTotal);
-      // formData.append('use', _this.use);
-      // formData.append('name', file.name);
-      // formData.append('suffix', suffix);
-      // formData.append('size', size);
-      // formData.append('key', key62);
-      //
-      // Loading.show();
-      // _this.$ajax.post(process.env.VUE_APP_SERVER + '/file/admin/upload', formData).then((response)=>{
-      //   Loading.hide();
-      //   let resp = response.data;
-      //   console.log("上传文件成功：", resp);
-      //   _this.afterUpload(resp);
-      //   $("#" + _this.inputId + "-input").val("");
-      // });
+
+      _this.upload(param);
+    },
+
+    upload: function (param) {
+      let _this = this;
+      let shardIndex = param.shardIndex;
+      let shardTotal = param.shardTotal;
+      let shardSize = param.shardSize;
+      let fileShard = _this.getFileShard(shardIndex, shardSize);
 
       // 将图片转为base64进行传输
       let fileReader = new FileReader();
@@ -114,27 +112,34 @@ export default {
         let base64 = e.target.result;
         // console.log("base64:", base64);
 
-        let param = {
-          'shard': base64,
-          'shardIndex': shardIndex,
-          'shardSize': shardSize,
-          'shardTotal': shardTotal,
-          'use': _this.use,
-          'name': file.name,
-          'suffix': suffix,
-          'size': file.size,
-          'key': key62
-        };
+        param.shard = base64;
+
         Loading.show();
-        _this.$ajax.post(process.env.VUE_APP_SERVER + '/file/admin/upload', param).then((response)=>{
+        _this.$ajax.post(process.env.VUE_APP_SERVER + '/file/admin/upload', param).then((response) => {
           Loading.hide();
           let resp = response.data;
           console.log("上传文件成功：", resp);
-          _this.afterUpload(resp);
+
+          if (shardIndex < shardTotal) {
+            // 上传下一个分片
+            param.shardIndex = param.shardIndex + 1;
+            _this.upload(param);
+          } else {
+            _this.afterUpload(resp);
+          }
           $("#" + _this.inputId + "-input").val("");
         });
       };
       fileReader.readAsDataURL(fileShard);
+    },
+
+    getFileShard: function (shardIndex, shardSize) {
+      let _this = this;
+      let file = _this.$refs.file.files[0];
+      let start = (shardIndex - 1) * shardSize;
+      let end = Math.min(file.size, start + shardSize);
+      let fileShard = file.slice(start, end);
+      return fileShard;
     },
 
     selectFile () {
