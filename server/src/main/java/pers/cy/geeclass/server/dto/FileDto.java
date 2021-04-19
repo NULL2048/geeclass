@@ -47,9 +47,7 @@ public class FileDto {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date updatedAt;
 
-    private Integer shardIndex;
-
-    private Integer shardSize;
+    private String shard;
 
     @Override
     public String toString() {
@@ -62,12 +60,25 @@ public class FileDto {
                 ", use='" + use + '\'' +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
+                ", shard='" + shard + '\'' +
                 ", shardIndex=" + shardIndex +
                 ", shardSize=" + shardSize +
                 ", shardTotal=" + shardTotal +
                 ", key='" + key + '\'' +
                 '}';
     }
+
+    public String getShard() {
+        return shard;
+    }
+
+    public void setShard(String shard) {
+        this.shard = shard;
+    }
+
+    private Integer shardIndex;
+
+    private Integer shardSize;
 
     public Integer getShardIndex() {
         return shardIndex;
