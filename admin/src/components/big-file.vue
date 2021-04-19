@@ -80,7 +80,7 @@ export default {
 
       // 文件分片
       let shardSize = 20 * 1024 * 1024;
-      let shardIndex = 1;
+      let shardIndex = 2;
       let start = (shardIndex - 1) * shardSize;
       let end = Math.min(file.size, start + shardSize);
       let fileShard = file.slice(start, end);
@@ -112,7 +112,7 @@ export default {
       let fileReader = new FileReader();
       fileReader.onload = function (e) {
         let base64 = e.target.result;
-        console.log("base64:", base64);
+        // console.log("base64:", base64);
 
         let param = {
           'shard': base64,
