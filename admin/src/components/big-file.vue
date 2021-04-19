@@ -81,7 +81,7 @@ export default {
       // 文件分片
       let shardSize = 20 * 1024 * 1024;
       let shardIndex = 1;
-      let start = shardIndex * shardSize;
+      let start = (shardIndex - 1) * shardSize;
       let end = Math.min(file.size, start + shardSize);
       let fileShard = file.slice(start, end);
       let size = file.size;
