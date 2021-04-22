@@ -150,12 +150,12 @@ public class UploadController {
         }
         LOG.info("删除分片结束");
     }
-//
-//    @GetMapping("/check/{key}")
-//    public ResponseDto check(@PathVariable String key) throws Exception {
-//        LOG.info("检查上传分片开始：{}", key);
-//        ResponseDto responseDto = new ResponseDto();
-//        FileDto fileDto = fileService.findByKey(key);
+
+    @GetMapping("/check/{key}")
+    public ResponseDto check(@PathVariable String key) {
+        LOG.info("检查上传分片开始：{}", key);
+        ResponseDto responseDto = new ResponseDto();
+        FileDto fileDto = fileService.findByKey(key);
 //        if (fileDto != null) {
 //            if (StringUtils.isEmpty(fileDto.getVod())) {
 //                fileDto.setPath(OSS_DOMAIN + fileDto.getPath());
@@ -167,7 +167,7 @@ public class UploadController {
 //                fileDto.setPath(fileUrl);
 //            }
 //        }
-//        responseDto.setContent(fileDto);
-//        return responseDto;
-//    }
+        responseDto.setContent(fileDto);
+        return responseDto;
+    }
 }
