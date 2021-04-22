@@ -54,7 +54,7 @@ export default {
       let key10 = parseInt(key, 16);
       let key62 = Tool._10to62(key10);
       console.log(key, key10, key62);
-      // console.log(hex_md5(Array()));
+      console.log(hex_md5(Array()));
       /*
         d41d8cd98f00b204e9800998ecf8427e
         2.8194976848941264e+38
