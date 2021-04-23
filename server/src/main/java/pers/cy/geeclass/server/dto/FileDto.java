@@ -49,6 +49,8 @@ public class FileDto {
 
     private String shard;
 
+    private String vod;
+
     @Override
     public String toString() {
         return "FileDto{" +
