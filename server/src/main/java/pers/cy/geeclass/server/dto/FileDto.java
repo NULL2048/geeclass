@@ -63,11 +63,20 @@ public class FileDto {
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 ", shard='" + shard + '\'' +
+                ", vod='" + vod + '\'' +
                 ", shardIndex=" + shardIndex +
                 ", shardSize=" + shardSize +
                 ", shardTotal=" + shardTotal +
                 ", key='" + key + '\'' +
                 '}';
+    }
+
+    public String getVod() {
+        return vod;
+    }
+
+    public void setVod(String vod) {
+        this.vod = vod;
     }
 
     public String getShard() {
