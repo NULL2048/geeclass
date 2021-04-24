@@ -132,12 +132,14 @@
 
                     <div v-show="section.video" class="row">
                       <div class="col-md-9">
-                        <video v-bind:src="section.video" id="video" controls="controls"></video>
+                        <player v-bind:player-id="'form-player-div'"
+                                ref="player"></player>
+                        <video v-bind:src="section.video" id="video" controls="controls" class="hidden"></video>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group">0
                   <label class="col-sm-2 control-label">时长</label>
                   <div class="col-sm-10">
                     <input v-model="section.time" class="form-control">
@@ -185,11 +187,13 @@
   import Pagination from "../../components/pagination";
   import BigFile from "../../components/big-file";
   import Vod from "../../components/vod";
+  import Player from "../../components/player";
+
 
 
   export default {
     name: 'business-section',
-    components: {Pagination,BigFile, Vod},
+    components: {Player,Pagination,BigFile, Vod},
     data: function () {
       return {
         section: {},
@@ -314,6 +318,7 @@
         _this.section.video = video;
         _this.section.vod = vod;
         _this.getTime();
+        _this.$refs.player.playUrl(video);
       },
 
       /**
