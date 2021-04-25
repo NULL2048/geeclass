@@ -158,8 +158,9 @@ export default {
         let resp = response.data;
         if (resp.success) {
           console.log("登录成功：", resp.content);
+          // SessionStorage.set("USER", resp.content);
           // let loginUser = resp.content;
-          // Tool.setLoginUser(resp.content);
+          Tool.setLoginUser(resp.content);
           //
           // // 判断“记住我”
           // if (_this.remember) {
