@@ -51,7 +51,7 @@ public class SectionService {
 
         sectionExample.setOrderByClause("sort asc");
         List<Section> sectionList = sectionMapper.selectByExample(sectionExample);
-        PageInfo pageInfo = new PageInfo<>(sectionList);
+        PageInfo<Section> pageInfo = new PageInfo<>(sectionList);
         sectionPageDto.setTotal(pageInfo.getTotal());
         List<SectionDto> sectionDtoList = new ArrayList<SectionDto>();
 

@@ -34,7 +34,7 @@
           width: '100%',
           autoplay: false,
           source: url,
-          cover: 'http://liveroom-img.oss-cn-qingdao.aliyuncs.com/logo.png',
+          cover: 'https://geeclass-course.oss-cn-beijing.aliyuncs.com/img/logo.jpg',
         }, function (player) {
           console.log('播放器创建好了。')
         });
@@ -61,7 +61,7 @@
               autoplay: false,
               vid: vod,
               playauth: resp.content,
-              cover: 'http://liveroom-img.oss-cn-qingdao.aliyuncs.com/logo.png',
+              cover: 'https://geeclass-course.oss-cn-beijing.aliyuncs.com/img/logo.jpg',
               encryptType:1, //当播放私有加密流时需要设置。
             },function(player){
               console.log('播放器创建好了。')

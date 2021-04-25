@@ -25,7 +25,7 @@
       <tr>
             <th>ID</th>
             <th>标题</th>
-            <th>视频</th>
+            <th>VOD</th>
             <th>时长</th>
             <th>收费</th>
             <th>顺序</th>
@@ -37,15 +37,17 @@
       <tr v-for="section in sections">
             <td>{{section.id}}</td>
             <td>{{section.title}}</td>
-            <td>{{section.courseId}}</td>
-            <td>{{section.chapterId}}</td>
-            <td>{{section.video}}</td>
+            <td>{{section.vod}}</td>
             <td>{{section.time | formatSecond}}</td>
             <td>{{SECTION_CHARGE | optionKV(section.charge)}}</td>
             <td>{{section.sort}}</td>
 
         <td>
           <div class="hidden-sm hidden-xs btn-group">
+            <button v-on:click="play(section)" class="btn btn-xs btn-info">
+              <i class="ace-icon fa fa-video-camera bigger-120"></i>
+            </button>
+
             <button v-on:click="edit(section)" class="btn btn-xs btn-info">
               <i class="ace-icon fa fa-pencil bigger-120"></i>
             </button>
@@ -139,7 +141,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="form-group">0
+                <div class="form-group">
                   <label class="col-sm-2 control-label">时长</label>
                   <div class="col-sm-10">
                     <input v-model="section.time" class="form-control">
@@ -180,6 +182,9 @@
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
+
+    <modal-player ref="modalPlayer"></modal-player>
+
   </div>
 </template>
 
@@ -188,12 +193,11 @@
   import BigFile from "../../components/big-file";
   import Vod from "../../components/vod";
   import Player from "../../components/player";
-
-
+  import ModalPlayer from "../../components/modal-player";
 
   export default {
     name: 'business-section',
-    components: {Player,Pagination,BigFile, Vod},
+    components: {ModalPlayer,Player,Pagination,BigFile, Vod},
     data: function () {
       return {
         section: {},
@@ -331,10 +335,17 @@
 
         setTimeout(function () {
           let ele = document.getElementById("video");
-          console.log(ele);
           _this.section.time = parseInt(ele.duration, 10);
-          console.log(_this.section.time);
         }, 1000);
+      },
+
+      /**
+       * 播放视频
+       * @param section
+       */
+      play(section) {
+        let _this = this;
+        _this.$refs.modalPlayer.playVod(section.vod);
       }
     }
   }

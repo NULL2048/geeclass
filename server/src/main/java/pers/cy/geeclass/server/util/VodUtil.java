@@ -46,7 +46,10 @@ public class VodUtil {
 //        request.setTags("tag1,tag2");
 
 //        request.setCoverURL("http://vod.aliyun.com/test_cover_url.jpg");
+
+        // 分类ID
         request.setCateId(1000296145L);
+        // 转码ID
         request.setTemplateGroupId("38dc62a6b585ae5f07474e70ef235f9d");
 
         //request.setWorkflowId("");
