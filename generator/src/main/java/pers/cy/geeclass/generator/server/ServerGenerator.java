@@ -15,7 +15,7 @@ import java.util.*;
  * 使用freemarker
  */
 public class ServerGenerator {
-    static String MODULE = "business";
+    static String MODULE = "system";
     static String toDtoPath = "server\\src\\main\\java\\pers\\cy\\geeclass\\server\\dto\\";
     static String toServicePath = "server\\src\\main\\java\\pers\\cy\\geeclass\\server\\service\\";
     static String toControllerPath = MODULE + "\\src\\main\\java\\pers\\cy\\geeclass\\" + MODULE + "\\controller\\admin\\";
