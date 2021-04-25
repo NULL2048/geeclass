@@ -5,11 +5,14 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import pers.cy.geeclass.server.domain.User;
 import pers.cy.geeclass.server.domain.UserExample;
 import pers.cy.geeclass.server.dto.UserDto;
 import pers.cy.geeclass.server.dto.PageDto;
+import pers.cy.geeclass.server.exception.BusinessException;
+import pers.cy.geeclass.server.exception.BusinessExceptionCode;
 import pers.cy.geeclass.server.mapper.UserMapper;
 import pers.cy.geeclass.server.util.CopyUtil;
 import pers.cy.geeclass.server.util.UuidUtil;
@@ -65,8 +68,11 @@ public class UserService {
      * 新增
      */
     private void insert(User user) {
-
         user.setId(UuidUtil.getShortUuid());
+        User userDb = this.selectByLoginName(user.getLoginName());
+        if (userDb != null) {
+            throw new BusinessException(BusinessExceptionCode.USER_LOGIN_NAME_EXIST);
+        }
         userMapper.insert(user);
     }
 
@@ -84,4 +90,19 @@ public class UserService {
         userMapper.deleteByPrimaryKey(id);
     }
 
+    /**
+     * 根据登录名查询用户信息
+     * @param loginName
+     * @return
+     */
+    public User selectByLoginName(String loginName) {
+        UserExample userExample = new UserExample();
+        userExample.createCriteria().andLoginNameEqualTo(loginName);
+        List<User> userList = userMapper.selectByExample(userExample);
+        if (CollectionUtils.isEmpty(userList)) {
+            return null;
+        } else {
+            return userList.get(0);
+        }
+    }
 }
