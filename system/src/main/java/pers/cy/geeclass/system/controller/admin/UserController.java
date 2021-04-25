@@ -6,10 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
 import pers.cy.geeclass.server.domain.User;
-import pers.cy.geeclass.server.dto.LoginUserDto;
-import pers.cy.geeclass.server.dto.UserDto;
-import pers.cy.geeclass.server.dto.PageDto;
-import pers.cy.geeclass.server.dto.ResponseDto;
+import pers.cy.geeclass.server.dto.*;
 import pers.cy.geeclass.server.service.UserService;
 import pers.cy.geeclass.server.util.UuidUtil;
 import pers.cy.geeclass.server.util.ValidatorUtil;
@@ -118,12 +115,24 @@ public class UserController {
 //        LoginUserDto loginUserDto = userService.login(userDto);
 //        String token = UuidUtil.getShortUuid();
 //        loginUserDto.setToken(token);
-////        request.getSession().setAttribute(Constants.LOGIN_USER, loginUserDto);
 //        redisTemplate.opsForValue().set(token, JSON.toJSONString(loginUserDto), 3600, TimeUnit.SECONDS);
 //        responseDto.setContent(loginUserDto);
 
         LoginUserDto loginUserDto = userService.login(userDto);
+        request.getSession().setAttribute(Constants.LOGIN_USER, loginUserDto);
         responseDto.setContent(loginUserDto);
+        return responseDto;
+    }
+
+    /**
+     * 退出登录
+     */
+    @GetMapping("/logout")
+    public ResponseDto logout(HttpServletRequest request) {
+        ResponseDto responseDto = new ResponseDto();
+        request.getSession().removeAttribute(Constants.LOGIN_USER);
+//        redisTemplate.delete(token);
+//        LOG.info("从redis中删除token:{}", token);
         return responseDto;
     }
 }
