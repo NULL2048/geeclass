@@ -2,6 +2,7 @@ package pers.cy.geeclass.system.controller.admin;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
 import pers.cy.geeclass.server.domain.User;
 import pers.cy.geeclass.server.dto.UserDto;
@@ -43,6 +44,7 @@ public class UserController {
      */
     @PostMapping("/save")
     public ResponseDto save(@RequestBody UserDto userDto) {
+        userDto.setPassword(DigestUtils.md5DigestAsHex(userDto.getPassword().getBytes()));
 
         // 保存校验
         ValidatorUtil.require(userDto.getLoginName(), "登录名");
