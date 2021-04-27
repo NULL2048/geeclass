@@ -170,8 +170,8 @@ export default {
       if (md5 !== rememberUser.md5) {
         _this.user.password = hex_md5(_this.user.password + KEY);
       }
-      //
-      // _this.user.imageCodeToken = _this.imageCodeToken;
+
+      _this.user.imageCodeToken = _this.imageCodeToken;
 
 
 
