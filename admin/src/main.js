@@ -12,11 +12,11 @@ Vue.prototype.$ajax = axios;
  */
 axios.interceptors.request.use(function (config) {
   console.log("请求：", config);
-  // let token = Tool.getLoginUser().token;
-  // if (Tool.isNotEmpty(token)) {
-  //   config.headers.token = token;
-  //   console.log("请求headers增加token:", token);
-  // }
+  let token = Tool.getLoginUser().token;
+  if (Tool.isNotEmpty(token)) {
+    config.headers.token = token;
+    console.log("请求headers增加token:", token);
+  }
   return config;
 }, error => {});
 axios.interceptors.response.use(function (response) {
