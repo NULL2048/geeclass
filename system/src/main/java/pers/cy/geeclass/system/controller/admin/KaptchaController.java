@@ -39,7 +39,6 @@ public class KaptchaController {
 
             // 将生成的验证码放入会话缓存中，后续验证的时候用到
              request.getSession().setAttribute(imageCodeToken, createText);
-            String id = request.getSession().getId();
             // 将生成的验证码放入redis缓存中，后续验证的时候用到
 //            redisTemplate.opsForValue().set(imageCodeToken, createText, 300, TimeUnit.SECONDS);
 
