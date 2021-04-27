@@ -21,39 +21,39 @@ public class LoginAdminGatewayFilter implements GatewayFilter, Ordered {
 
     private static final Logger LOG = LoggerFactory.getLogger(LoginAdminGatewayFilter.class);
 
-//    @Resource
-//    private RedisTemplate redisTemplate;
+    @Resource
+    private RedisTemplate redisTemplate;
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-//        String path = exchange.getRequest().getURI().getPath();
-//
-//        // 请求地址中不包含/admin/的，不是控台请求，不需要拦截
-//        if (!path.contains("/admin/")) {
-//            return chain.filter(exchange);
-//        }
-//        if (path.contains("/system/admin/user/login")
-//                || path.contains("/system/admin/user/logout")
-//                || path.contains("/system/admin/kaptcha")) {
-//            LOG.info("不需要控台登录验证：{}", path);
-//            return chain.filter(exchange);
-//        }
+        String path = exchange.getRequest().getURI().getPath();
+
+        // 请求地址中不包含/admin/的，不是控台请求，不需要拦截
+        if (!path.contains("/admin/")) {
+            return chain.filter(exchange);
+        }
+        if (path.contains("/system/admin/user/login")
+                || path.contains("/system/admin/user/logout")
+                || path.contains("/system/admin/kaptcha")) {
+            LOG.info("不需要控台登录验证：{}", path);
+            return chain.filter(exchange);
+        }
         //获取header的token参数
         String token = exchange.getRequest().getHeaders().getFirst("token");
         LOG.info("控台登录验证开始，token：{}", token);
-//        if (token == null || token.isEmpty()) {
-//            LOG.info( "token为空，请求被拦截" );
-//            exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
-//            return exchange.getResponse().setComplete();
-//        }
-//        Object object = redisTemplate.opsForValue().get(token);
-//        if (object == null) {
-//            LOG.warn( "token无效，请求被拦截" );
-//            exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
-//            return exchange.getResponse().setComplete();
-//        } else {
-//            LOG.info("已登录：{}", object);
-//
+        if (token == null || token.isEmpty()) {
+            LOG.info( "token为空，请求被拦截" );
+            exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
+            return exchange.getResponse().setComplete();
+        }
+        Object object = redisTemplate.opsForValue().get(token);
+        if (object == null) {
+            LOG.warn( "token无效，请求被拦截" );
+            exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
+            return exchange.getResponse().setComplete();
+        } else {
+            LOG.info("已登录：{}", object);
+
 //            // 增加权限校验，gateway里没有LoginUserDto，所以全部用JSON操作
 //            LOG.info("接口权限校验，请求地址：{}", path);
 //            boolean exist = false;
@@ -76,7 +76,7 @@ public class LoginAdminGatewayFilter implements GatewayFilter, Ordered {
 //            }
 
             return chain.filter(exchange);
-//        }
+        }
     }
 
     @Override
