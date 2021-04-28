@@ -273,7 +273,7 @@
           _this.resources = response.content;
           // 初始化树
           _this.initTree();
-          // _this.listRoleResource();
+          _this.listRoleResource();
         })
       },
 
@@ -324,6 +324,33 @@
           } else {
             Toast.warning(resp.message);
           }
+        });
+      },
+
+      /**
+       * 加载角色用户
+       */
+      listRoleResource() {
+        let _this = this;
+        // _this.roleUsers = [];
+        _this.$ajax.get(process.env.VUE_APP_SERVER + '/system/admin/role/list-resource/' + _this.role.id).then((response)=>{
+          let resp = response.data;
+          let resources = resp.content;
+
+          _this.zTree.checkAllNodes(false);
+          for (let i = 0; i < resources.length; i++) {
+            let node = _this.zTree.getNodeByParam("id", resources[i]);
+            _this.zTree.checkNode(node, true);
+          }
+
+          // 根据加载到用户ID，到【所有用户数组：users】中查找用户对象，用于列表显示
+          // for (let i = 0; i < userIds.length; i++) {
+          //   for (let j = 0; j < _this.users.length; j++) {
+          //     if (userIds[i] === _this.users[j].id) {
+          //       _this.roleUsers.push(_this.users[j]);
+          //     }
+          //   }
+          // }
         });
       }
     }

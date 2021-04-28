@@ -78,4 +78,16 @@ public class RoleController {
         responseDto.setContent(roleDto);
         return responseDto;
     }
+
+    /**
+     * 加载已关联的资源
+     */
+    @GetMapping("/list-resource/{roleId}")
+    public ResponseDto listResource(@PathVariable String roleId) {
+        LOG.info("加载资源开始");
+        ResponseDto responseDto = new ResponseDto<>();
+        List<String> resourceIdList = roleService.listResource(roleId);
+        responseDto.setContent(resourceIdList);
+        return responseDto;
+    }
 }
