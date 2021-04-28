@@ -1,6 +1,10 @@
 package pers.cy.geeclass.server.dto;
 
 
+import pers.cy.geeclass.server.domain.Resource;
+
+import java.util.List;
+
 public class ResourceDto {
 
     /**
@@ -27,6 +31,28 @@ public class ResourceDto {
      * 父id
      */
     private String parent;
+
+    private List<ResourceDto> children;
+
+    public List<ResourceDto> getChildren() {
+        return children;
+    }
+
+    @Override
+    public String toString() {
+        return "ResourceDto{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", page='" + page + '\'' +
+                ", request='" + request + '\'' +
+                ", parent='" + parent + '\'' +
+                ", children=" + children +
+                '}';
+    }
+
+    public void setChildren(List<ResourceDto> children) {
+        this.children = children;
+    }
 
     public String getId() {
         return id;
@@ -68,20 +94,5 @@ public class ResourceDto {
         this.parent = parent;
     }
 
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", name=").append(name);
-        sb.append(", page=").append(page);
-        sb.append(", request=").append(request);
-        sb.append(", parent=").append(parent);
-        sb.append("]");
-        return sb.toString();
-    }
 
 }
