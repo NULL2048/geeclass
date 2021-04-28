@@ -8,9 +8,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import pers.cy.geeclass.server.domain.Role;
 import pers.cy.geeclass.server.domain.RoleExample;
+import pers.cy.geeclass.server.domain.RoleResource;
+import pers.cy.geeclass.server.domain.RoleResourceExample;
 import pers.cy.geeclass.server.dto.RoleDto;
 import pers.cy.geeclass.server.dto.PageDto;
 import pers.cy.geeclass.server.mapper.RoleMapper;
+import pers.cy.geeclass.server.mapper.RoleResourceMapper;
 import pers.cy.geeclass.server.util.CopyUtil;
 import pers.cy.geeclass.server.util.UuidUtil;
 
@@ -23,6 +26,9 @@ public class RoleService {
 
     @Resource
     private RoleMapper roleMapper;
+
+    @Resource
+    private RoleResourceMapper roleResourceMapper;
 
     /**
      * 列表查询
@@ -84,4 +90,24 @@ public class RoleService {
         roleMapper.deleteByPrimaryKey(id);
     }
 
+    /**
+     * 按角色保存资源
+     */
+    public void saveResource(RoleDto roleDto) {
+        String roleId = roleDto.getId();
+        List<String> resourceIds = roleDto.getResourceIds();
+        // 清空库中所有的当前角色下的记录
+        RoleResourceExample example = new RoleResourceExample();
+        example.createCriteria().andRoleIdEqualTo(roleId);
+        roleResourceMapper.deleteByExample(example);
+
+        // 保存角色资源
+        for (int i = 0; i < resourceIds.size(); i++) {
+            RoleResource roleResource = new RoleResource();
+            roleResource.setId(UuidUtil.getShortUuid());
+            roleResource.setRoleId(roleId);
+            roleResource.setResourceId(resourceIds.get(i));
+            roleResourceMapper.insert(roleResource);
+        }
+    }
 }
