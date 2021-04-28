@@ -22,6 +22,8 @@ public class RoleDto {
 
     private List<String> resourceIds;
 
+    private List<String> userIds;
+
     @Override
     public String toString() {
         return "RoleDto{" +
@@ -29,7 +31,16 @@ public class RoleDto {
                 ", name='" + name + '\'' +
                 ", desc='" + desc + '\'' +
                 ", resourceIds=" + resourceIds +
+                ", userIds=" + userIds +
                 '}';
+    }
+
+    public List<String> getUserIds() {
+        return userIds;
+    }
+
+    public void setUserIds(List<String> userIds) {
+        this.userIds = userIds;
     }
 
     public List<String> getResourceIds() {
