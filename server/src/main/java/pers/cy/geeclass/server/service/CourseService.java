@@ -16,6 +16,7 @@ import pers.cy.geeclass.server.dto.CourseContentDto;
 import pers.cy.geeclass.server.dto.CourseDto;
 import pers.cy.geeclass.server.dto.PageDto;
 import pers.cy.geeclass.server.dto.SortDto;
+import pers.cy.geeclass.server.enums.CourseStatusEnum;
 import pers.cy.geeclass.server.mapper.CourseContentMapper;
 import pers.cy.geeclass.server.mapper.CourseMapper;
 import pers.cy.geeclass.server.mapper.my.MyCourseMapper;
@@ -52,7 +53,7 @@ public class CourseService {
         PageHelper.startPage(pageDto.getPage(), pageDto.getSize());
         CourseExample courseExample = new CourseExample();
 
-                courseExample.setOrderByClause("sort asc");
+        courseExample.setOrderByClause("sort asc");
 
         List<Course> courseList = courseMapper.selectByExample(courseExample);
         PageInfo pageInfo = new PageInfo<>(courseList);
@@ -66,6 +67,18 @@ public class CourseService {
             courseDtoList.add(courseDto);
         }
         pageDto.setList(courseDtoList);
+    }
+
+    /**
+     * 新课列表查询，只查询已发布的，按创建日期倒序
+     */
+    public List<CourseDto> listNew(PageDto pageDto) {
+        PageHelper.startPage(pageDto.getPage(), pageDto.getSize());
+        CourseExample courseExample = new CourseExample();
+        courseExample.createCriteria().andStatusEqualTo(CourseStatusEnum.PUBLISH.getCode());
+        courseExample.setOrderByClause("created_at desc");
+        List<Course> courseList = courseMapper.selectByExample(courseExample);
+        return CopyUtil.copyList(courseList, CourseDto.class);
     }
 
     /**
@@ -89,9 +102,9 @@ public class CourseService {
      * 新增
      */
     private void insert(Course course) {
-                Date now = new Date();
-                course.setCreatedAt(now);
-                course.setUpdatedAt(now);
+        Date now = new Date();
+        course.setCreatedAt(now);
+        course.setUpdatedAt(now);
 
         course.setId(UuidUtil.getShortUuid());
         courseMapper.insert(course);
@@ -101,7 +114,7 @@ public class CourseService {
      * 更新
      */
     private void update(Course course) {
-                course.setUpdatedAt(new Date());
+        course.setUpdatedAt(new Date());
         courseMapper.updateByPrimaryKey(course);
     }
 

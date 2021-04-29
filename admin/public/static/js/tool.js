@@ -123,10 +123,13 @@ Tool = {
    */
   hasResource: function (id) {
     let _this = this;
+    // 获取当前登录用户所持有资源
     let resources = _this.getLoginUser().resources;
+    // 如果该用户资源为空，直接返回false
     if (_this.isEmpty(resources)) {
       return false;
     }
+    // 用当前操作所需要的资源id与该用户所持有的资源一一进行比对，如果有比对上的，证明这个用户有权限，直接返回true
     for (let i = 0; i < resources.length; i++) {
       if (id === resources[i].id) {
         return true;

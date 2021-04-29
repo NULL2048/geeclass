@@ -16,10 +16,10 @@
     <table id="simple-table" class="table  table-bordered table-hover">
       <thead>
       <tr>
-                    <th>id</th>
-            <th>登录名</th>
-            <th>昵称</th>
-            <th>密码</th>
+        <th>id</th>
+        <th>登录名</th>
+        <th>昵称</th>
+        <th>密码</th>
         <th>操作</th>
       </tr>
       </thead>
