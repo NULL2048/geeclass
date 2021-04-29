@@ -365,7 +365,7 @@
 
 
 
-          <li class="">
+          <li v-show="hasResource('01')" class="">
             <a href="#" class="dropdown-toggle">
               <i class="menu-icon fa fa-list"></i>
               <span class="menu-text"> 系统管理 </span>
@@ -376,7 +376,7 @@
             <b class="arrow"></b>
 
             <ul class="submenu">
-              <li class="" id="system-user-sidebar">
+              <li v-show="hasResource('0101')" class="" id="system-user-sidebar">
                 <router-link to="/system/user">
                   <i class="menu-icon fa fa-caret-right"></i>
                   用户管理
@@ -385,7 +385,7 @@
                 <b class="arrow"></b>
               </li>
 
-              <li class="" id="system-resource-sidebar">
+              <li v-show="hasResource('0102')" class="" id="system-resource-sidebar">
                 <router-link to="/system/resource">
                   <i class="menu-icon fa fa-caret-right"></i>
                   资源管理
@@ -394,7 +394,7 @@
                 <b class="arrow"></b>
               </li>
 
-              <li class="" id="system-role-sidebar">
+              <li v-show="hasResource('0103')" class="" id="system-role-sidebar">
                 <router-link to="/system/role">
                   <i class="menu-icon fa fa-caret-right"></i>
                   角色管理
@@ -560,10 +560,18 @@ export default {
     }
   },
   methods: {
+
+    /**
+     * 查找是否有权限
+     * @param id
+     */
+    hasResource(id) {
+      return Tool.hasResource(id);
+    },
+
     login() {
       this.$router.push("/admin")
     },
-
 
     /**
      * 菜单激活样式，id是当前点击的菜单的id
