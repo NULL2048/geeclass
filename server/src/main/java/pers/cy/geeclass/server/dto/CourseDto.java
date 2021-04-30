@@ -75,7 +75,13 @@ public class CourseDto {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date updatedAt;
 
-    private String teacherId;
+    private List<CategoryDto> categorys;
+
+    private List<ChapterDto> chapters;
+
+    private List<SectionDto> sections;
+
+    private String content;
 
     @Override
     public String toString() {
@@ -93,10 +99,51 @@ public class CourseDto {
                 ", sort=" + sort +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
+                ", categorys=" + categorys +
+                ", chapters=" + chapters +
+                ", sections=" + sections +
+                ", content='" + content + '\'' +
+                ", teacher=" + teacher +
                 ", teacherId='" + teacherId + '\'' +
                 ", categorys=" + categorys +
                 '}';
     }
+
+    private TeacherDto teacher;
+
+    public List<ChapterDto> getChapters() {
+        return chapters;
+    }
+
+    public void setChapters(List<ChapterDto> chapters) {
+        this.chapters = chapters;
+    }
+
+    public List<SectionDto> getSections() {
+        return sections;
+    }
+
+    public void setSections(List<SectionDto> sections) {
+        this.sections = sections;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public TeacherDto getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(TeacherDto teacher) {
+        this.teacher = teacher;
+    }
+
+    private String teacherId;
 
     public String getTeacherId() {
         return teacherId;
@@ -114,7 +161,6 @@ public class CourseDto {
         this.categorys = categorys;
     }
 
-    private List<CategoryDto> categorys;
 
     public String getId() {
         return id;
