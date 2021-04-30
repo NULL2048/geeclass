@@ -2,7 +2,7 @@
   <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="/">
           <i>
             <img src="https://geeclass-course.oss-cn-beijing.aliyuncs.com/img/header-logo.png" height="45" width="156.816">
           </i>
@@ -16,10 +16,10 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="#">主页 <span class="sr-only">(current)</span></a>
+              <router-link class="nav-link" to="/">主页</router-link>
             </li>
             <li class="nav-item active">
-              <a class="nav-link" href="#">全部课程</a>
+              <router-link class="nav-link" to="/list">全部课程</router-link>
             </li>
             <li class="nav-item dropdown active">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
