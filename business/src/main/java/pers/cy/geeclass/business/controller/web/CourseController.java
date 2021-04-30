@@ -36,17 +36,17 @@ public class CourseController {
         return responseDto;
     }
 
-//    /**
-//     * 列表查询
-//     */
-//    @PostMapping("/list")
-//    public ResponseDto list(@RequestBody CoursePageDto pageDto) {
-//        ResponseDto responseDto = new ResponseDto();
+    /**
+     * 列表查询
+     */
+    @PostMapping("/list")
+    public ResponseDto list(@RequestBody PageDto pageDto) {
+        ResponseDto responseDto = new ResponseDto();
 //        pageDto.setStatus(CourseStatusEnum.PUBLISH.getCode());
-//        courseService.list(pageDto);
-//        responseDto.setContent(pageDto);
-//        return responseDto;
-//    }
+        courseService.list(pageDto);
+        responseDto.setContent(pageDto);
+        return responseDto;
+    }
 //
 //    @GetMapping("/find/{id}")
 //    public ResponseDto findCourse(@PathVariable String id) {

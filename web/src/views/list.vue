@@ -73,19 +73,20 @@
        */
       listCourse(page) {
         let _this = this;
-        // _this.$ajax.post(process.env.VUE_APP_SERVER + '/business/web/course/list', {
-        //   page: page,
-        //   size: _this.$refs.pagination.size,
-        //   categoryId: _this.level2Id || _this.level1Id || "", // 优先取level2Id
-        // }).then((response) => {
-        //   let resp = response.data;
-        //   if (resp.success) {
-        //     _this.courses = resp.content.list;
-        //     _this.$refs.pagination.render(page, resp.content.total);
-        //   }
-        // }).catch((response) => {
-        //   console.log("error：", response);
-        // })
+        _this.$ajax.post(process.env.VUE_APP_SERVER + '/business/web/course/list', {
+          page: page,
+          // size: _this.$refs.pagination.size,
+          size: 3,
+          // categoryId: _this.level2Id || _this.level1Id || "", // 优先取level2Id
+        }).then((response) => {
+          let resp = response.data;
+          if (resp.success) {
+            _this.courses = resp.content.list;
+            // _this.$refs.pagination.render(page, resp.content.total);
+          }
+        }).catch((response) => {
+          console.log("error：", response);
+        })
       },
 
       // /**
