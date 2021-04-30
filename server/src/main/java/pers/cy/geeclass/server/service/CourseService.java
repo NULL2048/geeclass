@@ -42,32 +42,15 @@ public class CourseService {
     @Resource
     private MyCourseMapper myCourseMapper;
     /**
-     * 列表查询
+     * 列表查询 ：关联课程分类表
      * @param pageDto
      */
     public void list(CoursePageDto pageDto) {
         // 查找第一页，每一页有一条数据
         PageHelper.startPage(pageDto.getPage(), pageDto.getSize());
-        CourseExample courseExample = new CourseExample();
-
-        CourseExample.Criteria criteria = courseExample.createCriteria();
-        if (!StringUtils.isEmpty(pageDto.getStatus())) {
-            criteria.andStatusEqualTo(pageDto.getStatus());
-        }
-
-        courseExample.setOrderByClause("sort asc");
-
-        List<Course> courseList = courseMapper.selectByExample(courseExample);
-        PageInfo pageInfo = new PageInfo<>(courseList);
+        List<CourseDto> courseDtoList = myCourseMapper.list(pageDto);
+        PageInfo<CourseDto> pageInfo = new PageInfo<>(courseDtoList);
         pageDto.setTotal(pageInfo.getTotal());
-        List<CourseDto> courseDtoList = new ArrayList<CourseDto>();
-
-        for (int i = 0, l = courseList.size(); i < l ; i++) {
-            Course course = courseList.get(i);
-            CourseDto courseDto = new CourseDto();
-            BeanUtils.copyProperties(course, courseDto);
-            courseDtoList.add(courseDto);
-        }
         pageDto.setList(courseDtoList);
     }
 
