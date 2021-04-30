@@ -25,27 +25,27 @@
           </div>
         </div>
 
-<!--        <div class="row">-->
+        <div class="row">
 
-<!--          &lt;!&ndash; 课程内容 & 大章小节 &ndash;&gt;-->
-<!--          <div class="col-md-9">-->
-<!--            &lt;!&ndash; Nav tabs &ndash;&gt;-->
-<!--            <ul class="nav nav-tabs">-->
-<!--              <li class="nav-item">-->
-<!--                <a class="nav-link active" href="#info" data-toggle="tab">课程介绍</a>-->
-<!--              </li>-->
-<!--              <li class="nav-item">-->
-<!--                <a class="nav-link" href="#chapter" data-toggle="tab">章节目录</a>-->
-<!--              </li>-->
-<!--            </ul>-->
+          <!-- 课程内容 & 大章小节 -->
+          <div class="col-md-9">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs">
+              <li class="nav-item">
+                <a class="nav-link active" href="#info" data-toggle="tab">课程介绍</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#chapter" data-toggle="tab">章节目录</a>
+              </li>
+            </ul>
 
-<!--            <br>-->
+            <br>
 
-<!--            &lt;!&ndash; Tab panes &ndash;&gt;-->
-<!--            <div class="tab-content">-->
-<!--              <div class="tab-pane active" id="info" v-html="course.content">-->
-<!--              </div>-->
-<!--              <div class="tab-pane" id="chapter">-->
+            <!-- Tab panes -->
+            <div class="tab-content">
+              <div class="tab-pane active" id="info" v-html="course.content">
+              </div>
+              <div class="tab-pane" id="chapter">
 <!--                <div v-for="(chapter, i) in chapters" class="chapter">-->
 <!--                  <div v-on:click="doFolded(chapter, i)" class="chapter-chapter">-->
 <!--                    <span>{{chapter.name}}</span>-->
@@ -72,13 +72,13 @@
 <!--                    </table>-->
 <!--                  </div>-->
 <!--                </div>-->
-<!--              </div>-->
-<!--            </div>-->
+              </div>
+            </div>
 
-<!--          </div>-->
+          </div>
 
-<!--          &lt;!&ndash; 讲师信息 &ndash;&gt;-->
-<!--          <div class="col-md-3">-->
+          <!-- 讲师信息 -->
+          <div class="col-md-3">
 <!--            <div class="card" style="width: 18rem;">-->
 <!--              <img v-bind:src="teacher.image" class="card-img-top">-->
 <!--              <div class="card-body">-->
@@ -87,9 +87,9 @@
 <!--                <p class="card-text">{{teacher.intro}}</p>-->
 <!--              </div>-->
 <!--            </div>-->
-<!--          </div>-->
+          </div>
 
-<!--        </div>-->
+        </div>
       </div>
     </div>
 
