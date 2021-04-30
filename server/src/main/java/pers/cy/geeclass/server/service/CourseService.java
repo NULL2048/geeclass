@@ -12,10 +12,7 @@ import org.springframework.util.StringUtils;
 import pers.cy.geeclass.server.domain.Course;
 import pers.cy.geeclass.server.domain.CourseContent;
 import pers.cy.geeclass.server.domain.CourseExample;
-import pers.cy.geeclass.server.dto.CourseContentDto;
-import pers.cy.geeclass.server.dto.CourseDto;
-import pers.cy.geeclass.server.dto.PageDto;
-import pers.cy.geeclass.server.dto.SortDto;
+import pers.cy.geeclass.server.dto.*;
 import pers.cy.geeclass.server.enums.CourseStatusEnum;
 import pers.cy.geeclass.server.mapper.CourseContentMapper;
 import pers.cy.geeclass.server.mapper.CourseMapper;
@@ -48,10 +45,15 @@ public class CourseService {
      * 列表查询
      * @param pageDto
      */
-    public void list(PageDto pageDto) {
+    public void list(CoursePageDto pageDto) {
         // 查找第一页，每一页有一条数据
         PageHelper.startPage(pageDto.getPage(), pageDto.getSize());
         CourseExample courseExample = new CourseExample();
+
+        CourseExample.Criteria criteria = courseExample.createCriteria();
+        if (!StringUtils.isEmpty(pageDto.getStatus())) {
+            criteria.andStatusEqualTo(pageDto.getStatus());
+        }
 
         courseExample.setOrderByClause("sort asc");
 

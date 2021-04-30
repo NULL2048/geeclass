@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 import pers.cy.geeclass.server.dto.CourseDto;
+import pers.cy.geeclass.server.dto.CoursePageDto;
 import pers.cy.geeclass.server.dto.PageDto;
 import pers.cy.geeclass.server.dto.ResponseDto;
 import pers.cy.geeclass.server.enums.CourseStatusEnum;
@@ -40,9 +41,9 @@ public class CourseController {
      * 列表查询
      */
     @PostMapping("/list")
-    public ResponseDto list(@RequestBody PageDto pageDto) {
+    public ResponseDto list(@RequestBody CoursePageDto pageDto) {
         ResponseDto responseDto = new ResponseDto();
-//        pageDto.setStatus(CourseStatusEnum.PUBLISH.getCode());
+        pageDto.setStatus(CourseStatusEnum.PUBLISH.getCode());
         courseService.list(pageDto);
         responseDto.setContent(pageDto);
         return responseDto;
