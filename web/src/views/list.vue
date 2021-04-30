@@ -168,8 +168,8 @@
        */
       onClickLevel2(level2Id) {
         let _this = this;
-        // $("#category-" + level2Id).siblings("a").removeClass("on");
-        // $("#category-" + level2Id).addClass("on");
+        $("#category-" + level2Id).siblings("a").removeClass("on");
+        $("#category-" + level2Id).addClass("on");
         //
         // // 点击二级分类时，设置变量，用于课程筛选
         // // 如果点击的是【无限】，则二级分类id为空
