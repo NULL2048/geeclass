@@ -35,20 +35,22 @@
           </ul>
 
           <span class="text-dark">欢迎：</span>
-          <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">登录/注册</button>
+          <button v-on:click="openLoginModal()" class="btn btn-outline-dark my-2 my-sm-0" type="submit">登录/注册</button>
         </div>
 
       </div>
     </nav>
+
+    <the-login ref="loginComponent"></the-login>
   </header>
 </template>
 
 <script>
 
-  // import TheLogin from "./login";
+  import TheLogin from "./login";
   export default {
     name: 'theHeader',
-    // components: {TheLogin},
+    components: {TheLogin},
     // data: function () {
     //   return {
     //     loginMember: {}
@@ -58,35 +60,35 @@
     //   let _this = this;
     //   _this.loginMember = Tool.getLoginMember();
     // },
-    // methods: {
-    //   /**
-    //    * 打开登录注册窗口
-    //    */
-    //   openLoginModal() {
-    //     let _this = this;
-    //     _this.$refs.loginComponent.openLoginModal();
-    //   },
-    //
-    //   setLoginMember(loginMember) {
-    //     let _this = this;
-    //     _this.loginMember = loginMember;
-    //   },
-    //
-    //   logout () {
-    //     let _this = this;
-    //     _this.$ajax.get(process.env.VUE_APP_SERVER + '/business/web/member/logout/' + _this.loginMember.token).then((response)=>{
-    //       let resp = response.data;
-    //       if (resp.success) {
-    //         Tool.setLoginMember(null);
-    //         _this.loginMember = {};
-    //         Toast.success("退出登录成功");
-    //         _this.$router.push("/");
-    //       } else {
-    //         Toast.warning(resp.message);
-    //       }
-    //     });
-    //   },
-    //
-    // }
+    methods: {
+      /**
+       * 打开登录注册窗口
+       */
+      openLoginModal() {
+        let _this = this;
+        _this.$refs.loginComponent.openLoginModal();
+      },
+
+      // setLoginMember(loginMember) {
+      //   let _this = this;
+      //   _this.loginMember = loginMember;
+      // },
+      //
+      // logout () {
+      //   let _this = this;
+      //   _this.$ajax.get(process.env.VUE_APP_SERVER + '/business/web/member/logout/' + _this.loginMember.token).then((response)=>{
+      //     let resp = response.data;
+      //     if (resp.success) {
+      //       Tool.setLoginMember(null);
+      //       _this.loginMember = {};
+      //       Toast.success("退出登录成功");
+      //       _this.$router.push("/");
+      //     } else {
+      //       Toast.warning(resp.message);
+      //     }
+      //   });
+      // },
+
+    }
   }
 </script>
