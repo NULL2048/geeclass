@@ -46,32 +46,32 @@
               <div class="tab-pane active" id="info" v-html="course.content">
               </div>
               <div class="tab-pane" id="chapter">
-<!--                <div v-for="(chapter, i) in chapters" class="chapter">-->
-<!--                  <div v-on:click="doFolded(chapter, i)" class="chapter-chapter">-->
-<!--                    <span>{{chapter.name}}</span>-->
-<!--                    <span class="pull-right">-->
-<!--                      <i v-show="chapter.folded" class="fa fa-plus-square" aria-hidden="true"></i>-->
-<!--                      <i v-show="!chapter.folded" class="fa fa-minus-square" aria-hidden="true"></i>-->
-<!--                    </span>-->
-<!--                  </div>-->
-<!--                  <div v-show="!chapter.folded">-->
-<!--                    <table class="table table-striped">-->
-<!--                      <tr v-for="(s, j) in chapter.sections" class="chapter-section-tr">-->
-<!--                        <td class="col-sm-8 col-xs-12">-->
-<!--                          <div v-on:click="play(s)" class="section-title">-->
-<!--                            <i class="fa fa-video-camera d-none d-sm-inline"></i>&nbsp;&nbsp;-->
-<!--                            <span class="d-none d-sm-inline">第{{j+1}}节&nbsp;&nbsp;</span>-->
-<!--                            {{s.title}}-->
-<!--                            <span v-show="s.charge !== SECTION_CHARGE.CHARGE.key" class="badge badge-primary hidden-xs">免费</span>-->
-<!--                          </div>-->
-<!--                        </td>-->
-<!--                        <td class="col-sm-1 text-right">-->
-<!--                          <span class="badge badge-primary">{{s.time | formatSecond}}</span>-->
-<!--                        </td>-->
-<!--                      </tr>-->
-<!--                    </table>-->
-<!--                  </div>-->
-<!--                </div>-->
+                <div v-for="(chapter, i) in chapters" class="chapter">
+                  <div v-on:click="doFolded(chapter, i)" class="chapter-chapter">
+                    <span>{{chapter.name}}</span>
+                    <span class="pull-right">
+                      <i v-show="chapter.folded" class="fa fa-plus-square" aria-hidden="true"></i>
+                      <i v-show="!chapter.folded" class="fa fa-minus-square" aria-hidden="true"></i>
+                    </span>
+                  </div>
+                  <div v-show="!chapter.folded">
+                    <table class="table table-striped">
+                      <tr v-for="(s, j) in chapter.sections" class="chapter-section-tr">
+                        <td class="col-sm-8 col-xs-12">
+                          <div v-on:click="play(s)" class="section-title">
+                            <i class="fa fa-video-camera d-none d-sm-inline"></i>&nbsp;&nbsp;
+                            <span class="d-none d-sm-inline">第{{j+1}}节&nbsp;&nbsp;</span>
+                            {{s.title}}
+                            <span v-show="s.charge !== SECTION_CHARGE.CHARGE.key" class="badge badge-primary hidden-xs">免费</span>
+                          </div>
+                        </td>
+                        <td class="col-sm-1 text-right">
+                          <span class="badge badge-primary">{{s.time | formatSecond}}</span>
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -112,7 +112,7 @@
         sections: [],
         // memberCourse: {},
         COURSE_LEVEL: COURSE_LEVEL,
-        // SECTION_CHARGE: SECTION_CHARGE
+        SECTION_CHARGE: SECTION_CHARGE
       }
     },
     mounted() {
@@ -133,32 +133,32 @@
           // // 获取报名信息
           // _this.getEnroll();
           //
-          // // 将所有的节放入对应的章中
-          // for (let i = 0; i < _this.chapters.length; i++) {
-          //   let c = _this.chapters[i];
-          //   c.sections = [];
-          //   for (let j = 0; j < _this.sections.length; j++) {
-          //     let s = _this.sections[j];
-          //     if (c.id === s.chapterId) {
-          //       c.sections.push(s);
-          //     }
-          //   }
-          //
-          //   Tool.sortAsc(c.sections, "sort");
-          // }
+          // 将所有的节放入对应的章中
+          for (let i = 0; i < _this.chapters.length; i++) {
+            let c = _this.chapters[i];
+            c.sections = [];
+            for (let j = 0; j < _this.sections.length; j++) {
+              let s = _this.sections[j];
+              if (c.id === s.chapterId) {
+                c.sections.push(s);
+              }
+            }
+
+            // Tool.sortAsc(c.sections, "sort");
+          }
         })
       },
-    //
-    //   /**
-    //    * 展开/收缩一个章节
-    //    * @param chapter
-    //    */
-    //   doFolded (chapter, i) {
-    //     let _this = this;
-    //     chapter.folded = !chapter.folded;
-    //     // 在v-for里写v-show，只修改属性不起作用，需要$set
-    //     _this.$set(_this.chapters, i, chapter);
-    //   },
+
+      /**
+       * 展开/收缩一个章节
+       * @param chapter
+       */
+      doFolded (chapter, i) {
+        let _this = this;
+        chapter.folded = !chapter.folded;
+        // 在v-for里写v-show，只修改属性不起作用，需要$set
+        _this.$set(_this.chapters, i, chapter);
+      },
     //
     //   /**
     //    * 播放视频
