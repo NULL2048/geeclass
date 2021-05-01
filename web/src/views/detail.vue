@@ -145,7 +145,7 @@
               }
             }
 
-            // Tool.sortAsc(c.sections, "sort");
+            Tool.sortAsc(c.sections, "sort");
           }
         })
       },
