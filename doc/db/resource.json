@@ -30,14 +30,19 @@
   },{
     "id": "0202", "name": "课程管理", "page": "business/course",
     "children": [
-      {"id": "020201", "name": "增删改查", "request": ["/business/admin/course","/business/admin/category/all","/business/admin/chapter/list","/business/admin/section/list","/business/admin/section/save"]}
+      {"id": "020201", "name": "增删改查", "request": ["/business/admin/course","/business/admin/category","/business/admin/chapter","/business/admin/section"]}
     ]
   },{
     "id": "0203", "name": "讲师管理", "page": "business/teacher",
     "children": [
       {"id": "020301", "name": "增删改查", "request": ["/business/admin/teacher"]}
     ]
-  }]
+  },{
+      "id": "0204", "name": "会员管理", "page": "business/member",
+      "children": [
+        {"id": "020401", "name": "增删改查", "request": ["/business/admin/member"]}
+      ]
+    }]
 },{
   "id": "03", "name": "文件管理",
   "children": [{
