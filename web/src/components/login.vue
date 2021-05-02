@@ -354,8 +354,8 @@
             }
 
             // 登录成功
-            // _this.$parent.setLoginMember(loginMember);
-            // $("#login-modal").modal("hide");
+            _this.$parent.setLoginMember(loginMember);
+            $("#login-modal").modal("hide");
 
 
           } else {
