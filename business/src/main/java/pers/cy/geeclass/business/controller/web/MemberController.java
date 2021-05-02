@@ -7,6 +7,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.util.DigestUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import pers.cy.geeclass.server.dto.LoginMemberDto;
 import pers.cy.geeclass.server.dto.MemberDto;
 import pers.cy.geeclass.server.dto.ResponseDto;
 import pers.cy.geeclass.server.exception.BusinessException;
@@ -27,8 +28,8 @@ public class MemberController {
     @Resource
     private MemberService memberService;
 
-//    @Resource(name = "redisTemplate")
-//    private RedisTemplate redisTemplate;
+    @Resource(name = "redisTemplate")
+    private RedisTemplate redisTemplate;
 
 //    @Resource
 //    private SmsService smsService;
@@ -62,41 +63,41 @@ public class MemberController {
         return responseDto;
     }
 
-//    /**
-//     * 登录
-//     */
-//    @PostMapping("/login")
-//    public ResponseDto login(@RequestBody MemberDto memberDto) {
-//        LOG.info("用户登录开始");
-//        memberDto.setPassword(DigestUtils.md5DigestAsHex(memberDto.getPassword().getBytes()));
-//        ResponseDto responseDto = new ResponseDto();
-//
-//        // 根据验证码token去获取缓存中的验证码，和用户输入的验证码是否一致
-//        String imageCode = (String) redisTemplate.opsForValue().get(memberDto.getImageCodeToken());
-//        LOG.info("从redis中获取到的验证码：{}", imageCode);
-//        if (StringUtils.isEmpty(imageCode)) {
-//            responseDto.setSuccess(false);
-//            responseDto.setMessage("验证码已过期");
-//            LOG.info("用户登录失败，验证码已过期");
-//            return responseDto;
-//        }
-//        if (!imageCode.toLowerCase().equals(memberDto.getImageCode().toLowerCase())) {
-//            responseDto.setSuccess(false);
-//            responseDto.setMessage("验证码不对");
-//            LOG.info("用户登录失败，验证码不对");
-//            return responseDto;
-//        } else {
-//            // 验证通过后，移除验证码
-//            redisTemplate.delete(memberDto.getImageCodeToken());
-//        }
-//
-//        LoginMemberDto loginMemberDto = memberService.login(memberDto);
-//        String token = UuidUtil.getShortUuid();
-//        loginMemberDto.setToken(token);
-//        redisTemplate.opsForValue().set(token, JSON.toJSONString(loginMemberDto), 3600, TimeUnit.SECONDS);
-//        responseDto.setContent(loginMemberDto);
-//        return responseDto;
-//    }
+    /**
+     * 登录
+     */
+    @PostMapping("/login")
+    public ResponseDto login(@RequestBody MemberDto memberDto) {
+        LOG.info("用户登录开始");
+        memberDto.setPassword(DigestUtils.md5DigestAsHex(memberDto.getPassword().getBytes()));
+        ResponseDto responseDto = new ResponseDto();
+
+        // 根据验证码token去获取缓存中的验证码，和用户输入的验证码是否一致
+        String imageCode = (String) redisTemplate.opsForValue().get(memberDto.getImageCodeToken());
+        LOG.info("从redis中获取到的验证码：{}", imageCode);
+        if (StringUtils.isEmpty(imageCode)) {
+            responseDto.setSuccess(false);
+            responseDto.setMessage("验证码已过期");
+            LOG.info("用户登录失败，验证码已过期");
+            return responseDto;
+        }
+        if (!imageCode.toLowerCase().equals(memberDto.getImageCode().toLowerCase())) {
+            responseDto.setSuccess(false);
+            responseDto.setMessage("验证码不对");
+            LOG.info("用户登录失败，验证码不对");
+            return responseDto;
+        } else {
+            // 验证通过后，移除验证码
+            redisTemplate.delete(memberDto.getImageCodeToken());
+        }
+
+        LoginMemberDto loginMemberDto = memberService.login(memberDto);
+        String token = UuidUtil.getShortUuid();
+        loginMemberDto.setToken(token);
+        redisTemplate.opsForValue().set(token, JSON.toJSONString(loginMemberDto), 3600, TimeUnit.SECONDS);
+        responseDto.setContent(loginMemberDto);
+        return responseDto;
+    }
 //
 //    /**
 //     * 退出登录

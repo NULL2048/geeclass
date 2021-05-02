@@ -30,6 +30,48 @@ public class MemberDto {
      */
     private String photo;
 
+
+    /**
+     * 图片验证码
+     */
+    private String imageCode;
+
+    @Override
+    public String toString() {
+        return "MemberDto{" +
+                "id='" + id + '\'' +
+                ", mobile='" + mobile + '\'' +
+                ", password='" + password + '\'' +
+                ", name='" + name + '\'' +
+                ", photo='" + photo + '\'' +
+                ", imageCode='" + imageCode + '\'' +
+                ", imageCodeToken='" + imageCodeToken + '\'' +
+                ", registerTime=" + registerTime +
+                '}';
+    }
+
+    public String getImageCode() {
+        return imageCode;
+    }
+
+    public void setImageCode(String imageCode) {
+        this.imageCode = imageCode;
+    }
+
+    public String getImageCodeToken() {
+        return imageCodeToken;
+    }
+
+    public void setImageCodeToken(String imageCodeToken) {
+        this.imageCodeToken = imageCodeToken;
+    }
+
+    /**
+     * 图片验证码token
+     */
+    private String imageCodeToken;
+
+
     /**
      * 注册时间
      */
@@ -84,21 +126,5 @@ public class MemberDto {
         this.registerTime = registerTime;
     }
 
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", mobile=").append(mobile);
-        sb.append(", password=").append(password);
-        sb.append(", name=").append(name);
-        sb.append(", photo=").append(photo);
-        sb.append(", registerTime=").append(registerTime);
-        sb.append("]");
-        return sb.toString();
-    }
 
 }

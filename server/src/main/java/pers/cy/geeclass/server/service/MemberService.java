@@ -3,13 +3,18 @@ package pers.cy.geeclass.server.service;
 import com.fasterxml.jackson.databind.util.BeanUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import pers.cy.geeclass.server.domain.Member;
 import pers.cy.geeclass.server.domain.MemberExample;
+import pers.cy.geeclass.server.dto.LoginMemberDto;
 import pers.cy.geeclass.server.dto.MemberDto;
 import pers.cy.geeclass.server.dto.PageDto;
+import pers.cy.geeclass.server.exception.BusinessException;
+import pers.cy.geeclass.server.exception.BusinessExceptionCode;
 import pers.cy.geeclass.server.mapper.MemberMapper;
 import pers.cy.geeclass.server.util.CopyUtil;
 import pers.cy.geeclass.server.util.UuidUtil;
@@ -21,6 +26,9 @@ import java.util.List;
 
 @Service
 public class MemberService {
+
+    private static final Logger LOG = LoggerFactory.getLogger(MemberService.class);
+
 
     @Resource
     private MemberMapper memberMapper;
@@ -86,4 +94,44 @@ public class MemberService {
         memberMapper.deleteByPrimaryKey(id);
     }
 
+    /**
+     * 按手机号查找
+     * @param mobile
+     * @return
+     */
+    public Member selectByMobile(String mobile) {
+        if (StringUtils.isEmpty(mobile)) {
+            return null;
+        }
+        MemberExample example = new MemberExample();
+        example.createCriteria().andMobileEqualTo(mobile);
+        List<Member> memberList = memberMapper.selectByExample(example);
+        if (memberList == null || memberList.size() == 0) {
+            return null;
+        } else {
+            return memberList.get(0);
+        }
+
+    }
+
+    /**
+     * 登录
+     * @param memberDto
+     */
+    public LoginMemberDto login(MemberDto memberDto) {
+        Member member = selectByMobile(memberDto.getMobile());
+        if (member == null) {
+            LOG.info("手机号不存在, {}", memberDto.getMobile());
+            throw new BusinessException(BusinessExceptionCode.LOGIN_MEMBER_ERROR);
+        } else {
+            if (member.getPassword().equals(memberDto.getPassword())) {
+                // 登录成功
+                LoginMemberDto loginMemberDto = CopyUtil.copy(member, LoginMemberDto.class);
+                return loginMemberDto;
+            } else {
+                LOG.info("密码不对, 输入密码：{}, 数据库密码：{}", memberDto.getPassword(), member.getPassword());
+                throw new BusinessException(BusinessExceptionCode.LOGIN_MEMBER_ERROR);
+            }
+        }
+    }
 }
