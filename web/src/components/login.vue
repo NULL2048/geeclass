@@ -263,6 +263,7 @@
        */
       openLoginModal() {
         let _this = this;
+        _this.loadImageCode();
         $("#login-modal").modal("show");
       },
 
@@ -365,14 +366,14 @@
       //     }
       //   });
       // },
-      // /**
-      //  * 加载图形验证码
-      //  */
-      // loadImageCode: function () {
-      //   let _this = this;
-      //   _this.imageCodeToken = Tool.uuid(8);
-      //   $('#image-code').attr('src', process.env.VUE_APP_SERVER + '/business/web/kaptcha/image-code/' + _this.imageCodeToken);
-      // },
+      /**
+       * 加载图形验证码
+       */
+      loadImageCode: function () {
+        let _this = this;
+        _this.imageCodeToken = Tool.uuid(8);
+        $('#image-code').attr('src', process.env.VUE_APP_SERVER + '/business/web/kaptcha/image-code/' + _this.imageCodeToken);
+      },
       //
       // /**
       //  * 发送注册短信
