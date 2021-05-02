@@ -36,35 +36,5 @@ public class SmsController {
         return responseDto;
     }
 
-    /**
-     * 保存，id值有时更新，无值时新增
-     * @param smsDto
-     * @return
-     */
-    @PostMapping("/save")
-    public ResponseDto save(@RequestBody SmsDto smsDto) {
 
-        // 保存校验
-                    ValidatorUtil.require(smsDto.getMobile(), "手机号");
-                    ValidatorUtil.length(smsDto.getMobile(), "手机号", 1, 50);
-                    ValidatorUtil.require(smsDto.getCode(), "验证码");
-                    ValidatorUtil.require(smsDto.getUse(), "用途");
-                    ValidatorUtil.require(smsDto.getAt(), "生成时间");
-                    ValidatorUtil.require(smsDto.getStatus(), "用途");
-
-        ResponseDto responseDto = new ResponseDto();
-        smsService.save(smsDto);
-        responseDto.setContent(smsDto);
-        return responseDto;
-    }
-
-    /**
-     * 删除
-     */
-    @DeleteMapping("/delete/{id}")
-    public ResponseDto delete(@PathVariable String id) {
-        ResponseDto responseDto = new ResponseDto();
-        smsService.delete(id);
-        return responseDto;
-    }
 }
