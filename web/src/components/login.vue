@@ -394,10 +394,9 @@
         //     Toast.warning("手机号已被注册");
         //   } else {
         //     // 调服务端发送短信接口
-        //     _this.sendSmsCode(sms, "register-send-code-btn");
+            _this.sendSmsCode(sms, "register-send-code-btn");
         //   }
         // })
-        _this.sendSmsCode(sms);
 
       },
 
@@ -421,27 +420,27 @@
           }
         })
       },
-      //
-      // /**
-      //  * 倒计时
-      //  * @param btnId
-      //  */
-      // setTime(btnId) {
-      //   let _this = this;
-      //   let btn = $("#" + btnId);
-      //   if (_this.countdown === 0) {
-      //     btn.removeAttr("disabled");
-      //     btn.text("获取验证码");
-      //     return;
-      //   } else {
-      //     btn.attr("disabled", true);
-      //     btn.text("重新发送(" + _this.countdown + ")");
-      //     _this.countdown--;
-      //   }
-      //   setTimeout(function () {
-      //     _this.setTime(btnId);
-      //   }, 1000);
-      // },
+
+      /**
+       * 倒计时
+       * @param btnId
+       */
+      setTime(btnId) {
+        let _this = this;
+        let btn = $("#" + btnId);
+        if (_this.countdown === 0) {
+          btn.removeAttr("disabled");
+          btn.text("获取验证码");
+          return;
+        } else {
+          btn.attr("disabled", true);
+          btn.text("重新发送(" + _this.countdown + ")");
+          _this.countdown--;
+        }
+        setTimeout(function () {
+          _this.setTime(btnId);
+        }, 1000);
+      },
       //
       // /**
       //  * 发送忘记密码短信
