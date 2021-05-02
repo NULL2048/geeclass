@@ -98,17 +98,17 @@ public class MemberController {
         responseDto.setContent(loginMemberDto);
         return responseDto;
     }
-//
-//    /**
-//     * 退出登录
-//     */
-//    @GetMapping("/logout/{token}")
-//    public ResponseDto logout(@PathVariable String token) {
-//        ResponseDto responseDto = new ResponseDto();
-//        redisTemplate.delete(token);
-//        LOG.info("从redis中删除token:{}", token);
-//        return responseDto;
-//    }
+
+    /**
+     * 退出登录
+     */
+    @GetMapping("/logout/{token}")
+    public ResponseDto logout(@PathVariable String token) {
+        ResponseDto responseDto = new ResponseDto();
+        redisTemplate.delete(token);
+        LOG.info("从redis中删除token:{}", token);
+        return responseDto;
+    }
 //
 //    /**
 //     * 校验手机号是否存在
