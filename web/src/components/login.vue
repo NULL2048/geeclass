@@ -121,8 +121,7 @@
                   <input id="orget-mobile-code" v-model="memberForget.code" class="form-control" placeholder="手机验证码">
 
                 <div class="input-group-append">
-<!--                  v-on:click="sendSmsForForget()"-->
-                  <button class="btn btn-outline-secondary" id="forget-send-code-btn">
+                  <button class="btn btn-outline-secondary" id="forget-send-code-btn" v-on:click="sendSmsForForget()">
                     发送验证码
                   </button>
                 </div>
@@ -373,53 +372,55 @@
         _this.imageCodeToken = Tool.uuid(8);
         $('#image-code').attr('src', process.env.VUE_APP_SERVER + '/business/web/kaptcha/image-code/' + _this.imageCodeToken);
       },
-      //
-      // /**
-      //  * 发送注册短信
-      //  */
-      // sendSmsForRegister() {
-      //   let _this = this;
-      //
-      //   if (!_this.onRegisterMobileBlur()) {
-      //     return false;
-      //   }
-      //
-      //   let sms = {
-      //     mobile: _this.memberRegister.mobile,
-      //     use: SMS_USE.REGISTER.key
-      //   };
-      //
-      //   _this.$ajax.get(process.env.VUE_APP_SERVER + '/business/web/member/is-mobile-exist/' + _this.memberRegister.mobile).then((res)=>{
-      //     let response = res.data;
-      //     if (response.success) {
-      //       Toast.warning("手机号已被注册");
-      //     } else {
-      //       // 调服务端发送短信接口
-      //       _this.sendSmsCode(sms, "register-send-code-btn");
-      //     }
-      //   })
-      // },
-      //
-      // /**
-      //  * 发送短信
-      //  */
-      // sendSmsCode(sms, btnId) {
-      //   let _this = this;
-      //
-      //   // 调服务端发短信接口
-      //   _this.$ajax.post(process.env.VUE_APP_SERVER + '/business/web/sms/send', sms).then((res)=> {
-      //     let response = res.data;
-      //     if (response.success) {
-      //       Toast.success("短信已发送");
-      //
-      //       // 开始倒计时
-      //       _this.countdown = 60;
-      //       _this.setTime(btnId);
-      //     } else {
-      //       Toast.warning(response.message);
-      //     }
-      //   })
-      // },
+
+      /**
+       * 发送注册短信
+       */
+      sendSmsForRegister() {
+        let _this = this;
+
+        // if (!_this.onRegisterMobileBlur()) {
+        //   return false;
+        // }
+
+        let sms = {
+          mobile: _this.memberRegister.mobile,
+          use: SMS_USE.REGISTER.key
+        };
+
+        // _this.$ajax.get(process.env.VUE_APP_SERVER + '/business/web/member/is-mobile-exist/' + _this.memberRegister.mobile).then((res)=>{
+        //   let response = res.data;
+        //   if (response.success) {
+        //     Toast.warning("手机号已被注册");
+        //   } else {
+        //     // 调服务端发送短信接口
+        //     _this.sendSmsCode(sms, "register-send-code-btn");
+        //   }
+        // })
+        _this.sendSmsCode(sms);
+
+      },
+
+      /**
+       * 发送短信
+       */
+      sendSmsCode(sms, btnId) {
+        let _this = this;
+
+        // 调服务端发短信接口
+        _this.$ajax.post(process.env.VUE_APP_SERVER + '/business/web/sms/send', sms).then((res)=> {
+          let response = res.data;
+          if (response.success) {
+            Toast.success("短信已发送");
+
+            // 开始倒计时
+            _this.countdown = 60;
+            _this.setTime(btnId);
+          } else {
+            Toast.warning(response.message);
+          }
+        })
+      },
       //
       // /**
       //  * 倒计时
