@@ -3,42 +3,42 @@
     <div class="modal-dialog modal-login" role="document">
       <div class="modal-content">
         <div class="modal-body">
-<!--          <div class="login-div" v-show="MODAL_STATUS === STATUS_LOGIN">-->
-<!--            <h3>登&nbsp;&nbsp;录</h3>-->
-<!--            <div class="form-group">-->
-<!--              <input v-model="member.mobile" class="form-control" placeholder="手机号">-->
-<!--            </div>-->
-<!--            <div class="form-group">-->
-<!--              <input class="form-control" type="password" placeholder="密码" v-model="member.password">-->
-<!--            </div>-->
-<!--            <div class="form-group">-->
-<!--              <div class="input-group">-->
-<!--                <input id="image-code-input" class="form-control" type="text" placeholder="验证码"-->
-<!--                       v-model="member.imageCode">-->
-<!--                <div class="input-group-addon" id="image-code-addon">-->
-<!--                  <img id="image-code" alt="验证码" v-on:click="loadImageCode()"/>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--            <div class="form-group">-->
-<!--              <button v-on:click="login()" class="btn btn-primary btn-block submit-button">-->
-<!--                登&nbsp;&nbsp;录-->
-<!--              </button>-->
-<!--            </div>-->
-<!--            <div class="form-group">-->
-<!--              <div class="checkbox">-->
-<!--                <label>-->
-<!--                  <input type="checkbox" class="remember" v-model="remember"> 记住密码-->
-<!--                </label>-->
-<!--                <div class="pull-right">-->
-<!--                  <a href="javascript:;" v-on:click="toForgetDiv()">忘记密码</a>&nbsp;-->
-<!--                  <a href="javascript:;" v-on:click="toRegisterDiv()">我要注册</a>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--            <div class="form-group to-register-div">-->
-<!--            </div>-->
-<!--          </div>-->
+          <div class="login-div" v-show="MODAL_STATUS === STATUS_LOGIN">
+            <h3>登&nbsp;&nbsp;录</h3>
+            <div class="form-group">
+              <input v-model="member.mobile" class="form-control" placeholder="手机号">
+            </div>
+            <div class="form-group">
+              <input class="form-control" type="password" placeholder="密码" v-model="member.password">
+            </div>
+            <div class="form-group">
+              <div class="input-group">
+                <input id="image-code-input" class="form-control" type="text" placeholder="验证码"
+                       v-model="member.imageCode">
+                <div class="input-group-addon" id="image-code-addon">
+                  <img id="image-code" alt="验证码" v-on:click="loadImageCode()"/>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <button v-on:click="login()" class="btn btn-primary btn-block submit-button">
+                登&nbsp;&nbsp;录
+              </button>
+            </div>
+            <div class="form-group">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" class="remember" v-model="remember"> 记住密码
+                </label>
+                <div class="pull-right">
+                  <a href="javascript:;" v-on:click="toForgetDiv()">忘记密码</a>&nbsp;
+                  <a href="javascript:;" v-on:click="toRegisterDiv()">我要注册</a>
+                </div>
+              </div>
+            </div>
+            <div class="form-group to-register-div">
+            </div>
+          </div>
           <div class="register-div" v-show="MODAL_STATUS === STATUS_REGISTER">
             <h3>注&nbsp;&nbsp;册</h3>
             <div class="form-group">
@@ -99,57 +99,64 @@
               </button>
             </div>
             <div class="form-group to-login-div">
-<!--              <a href="javascript:;" v-on:click="toLoginDiv()">我要登录</a>-->
-              <a href="javascript:;">我要登录</a>
+              <a href="javascript:;" v-on:click="toLoginDiv()">我要登录</a>
             </div>
           </div>
-<!--          <div class="forget-div" v-show="MODAL_STATUS === STATUS_FORGET">-->
-<!--            <h3>忘记密码</h3>-->
-<!--            <div class="form-group">-->
+          <div class="forget-div" v-show="MODAL_STATUS === STATUS_FORGET">
+            <h3>忘记密码</h3>
+            <div class="form-group">
 <!--              <input v-on:blur="onForgetMobileBlur()"-->
 <!--                     v-bind:class="forgetMobileValidateClass"-->
 <!--                     id="forget-mobile" v-model="memberForget.mobile"-->
 <!--                     class="form-control" placeholder="手机号">-->
 <!--              <span v-show="forgetMobileValidate === false" class="text-danger">手机号11位数字，且必须已注册</span>-->
-<!--            </div>-->
-<!--            <div class="form-group">-->
-<!--              <div class="input-group">-->
+                <input id="forget-mobile" v-model="memberForget.mobile" class="form-control" placeholder="手机号">
+            </div>
+            <div class="form-group">
+              <div class="input-group">
 <!--                <input v-on:blur="onForgetMobileCodeBlur()"-->
 <!--                       v-bind:class="forgetMobileCodeValidateClass"-->
 <!--                       id="forget-mobile-code" class="form-control"-->
 <!--                       placeholder="手机验证码" v-model="memberForget.smsCode">-->
-<!--                <div class="input-group-append">-->
-<!--                  <button v-on:click="sendSmsForForget()"-->
-<!--                          class="btn btn-outline-secondary" id="forget-send-code-btn">-->
-<!--                    发送验证码-->
-<!--                  </button>-->
-<!--                </div>-->
-<!--              </div>-->
+                  <input id="orget-mobile-code" v-model="memberForget.code" class="form-control" placeholder="手机验证码">
+
+                <div class="input-group-append">
+<!--                  v-on:click="sendSmsForForget()"-->
+                  <button class="btn btn-outline-secondary" id="forget-send-code-btn">
+                    发送验证码
+                  </button>
+                </div>
+              </div>
 <!--              <span v-show="forgetMobileCodeValidate === false" class="text-danger">请输入短信6位验证码</span>-->
-<!--            </div>-->
-<!--            <div class="form-group">-->
+            </div>
+            <div class="form-group">
 <!--              <input v-on:blur="onForgetPasswordBlur()"-->
 <!--                     v-bind:class="forgetPasswordValidateClass"-->
 <!--                     id="forget-password" v-model="memberForget.passwordOriginal"-->
 <!--                     class="form-control" placeholder="密码" type="password">-->
 <!--              <span v-show="forgetPasswordValidate === false" class="text-danger">密码最少6位，包含至少1字母和1个数字</span>-->
-<!--            </div>-->
-<!--            <div class="form-group">-->
+              <input id="forget-password" v-model="memberForget.passwordOriginal" class="form-control" placeholder="密码" type="password">
+
+            </div>
+            <div class="form-group">
 <!--              <input v-on:blur="onForgetConfirmPasswordBlur()"-->
 <!--                     v-bind:class="forgetConfirmPasswordValidateClass"-->
 <!--                     id="forget-confirm-password" v-model="memberForget.confirm"-->
 <!--                     class="form-control" placeholder="确认密码" type="password">-->
 <!--              <span v-show="forgetConfirmPasswordValidate === false" class="text-danger">确认密码和密码一致</span>-->
-<!--            </div>-->
-<!--            <div class="form-group">-->
-<!--              <button v-on:click="resetPassword()" class="btn btn-primary btn-block submit-button">-->
-<!--                重&nbsp;&nbsp;置-->
-<!--              </button>-->
-<!--            </div>-->
-<!--            <div class="form-group to-login-div">-->
-<!--              <a href="javascript:;" v-on:click="toLoginDiv()">我要登录</a>-->
-<!--            </div>-->
-<!--          </div>-->
+              <input id="forget-confirm-password" v-model="memberForget.confirm" class="form-control" placeholder="确认密码" type="password">
+
+            </div>
+            <div class="form-group">
+<!--              v-on:click="resetPassword()"-->
+              <button class="btn btn-primary btn-block submit-button">
+                重&nbsp;&nbsp;置
+              </button>
+            </div>
+            <div class="form-group to-login-div">
+              <a href="javascript:;" v-on:click="toLoginDiv()">我要登录</a>
+            </div>
+          </div>
         </div>
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -163,13 +170,13 @@
     data: function () {
       return {
         // 模态框内容切换：登录、注册、忘记密码
-        // STATUS_LOGIN: "STATUS_LOGIN",
-        // STATUS_REGISTER: "STATUS_REGISTER",
-        // STATUS_FORGET: "STATUS_FORGET",
-        // MODAL_STATUS: "",
+        STATUS_LOGIN: "STATUS_LOGIN",
+        STATUS_REGISTER: "STATUS_REGISTER",
+        STATUS_FORGET: "STATUS_FORGET",
+        MODAL_STATUS: "",
 
-        // member: {},
-        // memberForget: {},
+        member: {},
+        memberForget: {},
         memberRegister: {},
 
         remember: true, // 记住密码
@@ -247,7 +254,7 @@
     // },
     mounted() {
       let _this = this;
-      // _this.toLoginDiv();
+      _this.toLoginDiv();
     },
     methods: {
 
@@ -260,29 +267,29 @@
       },
 
       //---------------登录框、注册框、忘记密码框切换-----------------
-      // toLoginDiv() {
-      //   let _this = this;
+      toLoginDiv() {
+        let _this = this;
 
-      //   // 从缓存中获取记住的用户名密码，如果获取不到，说明上一次没有勾选“记住我”
-      //   let rememberMember = LocalStorage.get(LOCAL_KEY_REMEMBER_MEMBER);
-      //   if (rememberMember) {
-      //     _this.member = rememberMember;
-      //   }
-      //
-      //   // 显示登录框时就刷新一次验证码图片
-      //   _this.loadImageCode();
-      //
-      //   _this.MODAL_STATUS = _this.STATUS_LOGIN
-      // },
-      // toRegisterDiv() {
-      //   let _this = this;
-      //   _this.MODAL_STATUS = _this.STATUS_REGISTER
-      // },
-      // toForgetDiv() {
-      //   let _this = this;
-      //   _this.MODAL_STATUS = _this.STATUS_FORGET
-      // },
-      //
+        // // 从缓存中获取记住的用户名密码，如果获取不到，说明上一次没有勾选“记住我”
+        // let rememberMember = LocalStorage.get(LOCAL_KEY_REMEMBER_MEMBER);
+        // if (rememberMember) {
+        //   _this.member = rememberMember;
+        // }
+        //
+        // // 显示登录框时就刷新一次验证码图片
+        // _this.loadImageCode();
+        //
+        _this.MODAL_STATUS = _this.STATUS_LOGIN
+      },
+      toRegisterDiv() {
+        let _this = this;
+        _this.MODAL_STATUS = _this.STATUS_REGISTER
+      },
+      toForgetDiv() {
+        let _this = this;
+        _this.MODAL_STATUS = _this.STATUS_FORGET
+      },
+
       register() {
         let _this = this;
       //
@@ -569,12 +576,7 @@
     max-width: 400px;
   }
 
-  /*#login-modal input:not(.remember) {*/
-  /*  height: 45px;*/
-  /*  font-size: 16px;*/
-  /*}*/
-
-  #login-modal input{
+  #login-modal input:not(.remember) {
     height: 45px;
     font-size: 16px;
   }
