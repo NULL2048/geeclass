@@ -42,12 +42,11 @@
           <div class="register-div" v-show="MODAL_STATUS === STATUS_REGISTER">
             <h3>注&nbsp;&nbsp;册</h3>
             <div class="form-group">
-<!--              <input v-on:blur="onRegisterMobileBlur()"-->
-<!--                     v-bind:class="registerMobileValidateClass"-->
-<!--                     id="register-mobile" v-model="memberRegister.mobile"-->
-<!--                     class="form-control" placeholder="手机号">-->
-<!--              <span v-show="registerMobileValidate === false" class="text-danger">手机号11位数字，且不能重复</span>-->
-              <input id="register-mobile" v-model="memberRegister.mobile" class="form-control" placeholder="手机号">
+              <input v-on:blur="onRegisterMobileBlur()"
+                     v-bind:class="registerMobileValidateClass"
+                     id="register-mobile" v-model="memberRegister.mobile"
+                     class="form-control" placeholder="手机号">
+              <span v-show="registerMobileValidate === false" class="text-danger">手机号11位数字，且不能重复</span>
             </div>
             <div class="form-group">
               <div class="input-group">
@@ -182,7 +181,7 @@
         imageCodeToken: "",
 
         // 注册框显示错误信息
-        // registerMobileValidate: null,
+        registerMobileValidate: null,
         // registerMobileCodeValidate: null,
         // registerPasswordValidate: null,
         // registerNameValidate: null,
@@ -195,62 +194,62 @@
         // forgetConfirmPasswordValidate: null,
       }
     },
-    // computed: {
-    //   registerMobileValidateClass: function () {
-    //     return {
-    //       'border-success': this.registerMobileValidate === true,
-    //       'border-danger': this.registerMobileValidate === false,
-    //     }
-    //   },
-    //   registerMobileCodeValidateClass: function () {
-    //     return {
-    //       'border-success': this.registerMobileCodeValidate === true,
-    //       'border-danger': this.registerMobileCodeValidate === false,
-    //     }
-    //   },
-    //   registerPasswordValidateClass: function () {
-    //     return {
-    //       'border-success': this.registerPasswordValidate === true,
-    //       'border-danger': this.registerPasswordValidate === false,
-    //     }
-    //   },
-    //   registerNameValidateClass: function () {
-    //     return {
-    //       'border-success': this.registerNameValidate === true,
-    //       'border-danger': this.registerNameValidate === false,
-    //     }
-    //   },
-    //   registerConfirmPasswordValidateClass: function () {
-    //     return {
-    //       'border-success': this.registerConfirmPasswordValidate === true,
-    //       'border-danger': this.registerConfirmPasswordValidate === false,
-    //     }
-    //   },
-    //   forgetMobileValidateClass: function () {
-    //     return {
-    //       'border-success': this.forgetMobileValidate === true,
-    //       'border-danger': this.forgetMobileValidate === false,
-    //     }
-    //   },
-    //   forgetMobileCodeValidateClass: function () {
-    //     return {
-    //       'border-success': this.forgetMobileCodeValidate === true,
-    //       'border-danger': this.forgetMobileCodeValidate === false,
-    //     }
-    //   },
-    //   forgetPasswordValidateClass: function () {
-    //     return {
-    //       'border-success': this.forgetPasswordValidate === true,
-    //       'border-danger': this.forgetPasswordValidate === false,
-    //     }
-    //   },
-    //   forgetConfirmPasswordValidateClass: function () {
-    //     return {
-    //       'border-success': this.forgetConfirmPasswordValidate === true,
-    //       'border-danger': this.forgetConfirmPasswordValidate === false,
-    //     }
-    //   },
-    // },
+    computed: {
+      registerMobileValidateClass: function () {
+        return {
+          'border-success': this.registerMobileValidate === true,
+          'border-danger': this.registerMobileValidate === false,
+        }
+      },
+      // registerMobileCodeValidateClass: function () {
+      //   return {
+      //     'border-success': this.registerMobileCodeValidate === true,
+      //     'border-danger': this.registerMobileCodeValidate === false,
+      //   }
+      // },
+      // registerPasswordValidateClass: function () {
+      //   return {
+      //     'border-success': this.registerPasswordValidate === true,
+      //     'border-danger': this.registerPasswordValidate === false,
+      //   }
+      // },
+      // registerNameValidateClass: function () {
+      //   return {
+      //     'border-success': this.registerNameValidate === true,
+      //     'border-danger': this.registerNameValidate === false,
+      //   }
+      // },
+      // registerConfirmPasswordValidateClass: function () {
+      //   return {
+      //     'border-success': this.registerConfirmPasswordValidate === true,
+      //     'border-danger': this.registerConfirmPasswordValidate === false,
+      //   }
+      // },
+      // forgetMobileValidateClass: function () {
+      //   return {
+      //     'border-success': this.forgetMobileValidate === true,
+      //     'border-danger': this.forgetMobileValidate === false,
+      //   }
+      // },
+      // forgetMobileCodeValidateClass: function () {
+      //   return {
+      //     'border-success': this.forgetMobileCodeValidate === true,
+      //     'border-danger': this.forgetMobileCodeValidate === false,
+      //   }
+      // },
+      // forgetPasswordValidateClass: function () {
+      //   return {
+      //     'border-success': this.forgetPasswordValidate === true,
+      //     'border-danger': this.forgetPasswordValidate === false,
+      //   }
+      // },
+      // forgetConfirmPasswordValidateClass: function () {
+      //   return {
+      //     'border-success': this.forgetConfirmPasswordValidate === true,
+      //     'border-danger': this.forgetConfirmPasswordValidate === false,
+      //   }
+      // },
+    },
     mounted() {
       let _this = this;
       _this.toLoginDiv();
@@ -379,9 +378,9 @@
       sendSmsForRegister() {
         let _this = this;
 
-        // if (!_this.onRegisterMobileBlur()) {
-        //   return false;
-        // }
+        if (!_this.onRegisterMobileBlur()) {
+          return false;
+        }
 
         let sms = {
           mobile: _this.memberRegister.mobile,
@@ -495,14 +494,14 @@
       //     console.log("error：", response);
       //   })
       // },
-      //
-      // //-------------------------------- 注册框校验 ----------------------------
-      //
-      // onRegisterMobileBlur () {
-      //   let _this = this;
-      //   _this.registerMobileValidate = Pattern.validateMobile(_this.memberRegister.mobile);
-      //   return _this.registerMobileValidate;
-      // },
+
+      //-------------------------------- 注册框校验 ----------------------------
+
+      onRegisterMobileBlur () {
+        let _this = this;
+        _this.registerMobileValidate = Pattern.validateMobile(_this.memberRegister.mobile);
+        return _this.registerMobileValidate;
+      },
       //
       // onRegisterMobileCodeBlur () {
       //   let _this = this;
