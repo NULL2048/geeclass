@@ -5,6 +5,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import pers.cy.geeclass.server.domain.MemberCourse;
 import pers.cy.geeclass.server.domain.MemberCourseExample;
@@ -66,9 +67,9 @@ public class MemberCourseService {
      * 新增
      */
     private void insert(MemberCourse memberCourse) {
-                Date now = new Date();
-
+        Date now = new Date();
         memberCourse.setId(UuidUtil.getShortUuid());
+        memberCourse.setAt(now);
         memberCourseMapper.insert(memberCourse);
     }
 
@@ -86,4 +87,44 @@ public class MemberCourseService {
         memberCourseMapper.deleteByPrimaryKey(id);
     }
 
+    /**
+     * 报名，先判断是否已报名
+     * @param memberCourseDto
+     */
+    public MemberCourseDto enroll(MemberCourseDto memberCourseDto) {
+        MemberCourse memberCourseDb = this.select(memberCourseDto.getMemberId(), memberCourseDto.getCourseId());
+        if (memberCourseDb == null) {
+            MemberCourse memberCourse = CopyUtil.copy(memberCourseDto, MemberCourse.class);
+            this.insert(memberCourse);
+            // 将数据库信息全部返回，包括id, at
+            return CopyUtil.copy(memberCourse, MemberCourseDto.class);
+        } else {
+            // 如果已经报名，则直接返回已报名的信息
+            return CopyUtil.copy(memberCourseDb, MemberCourseDto.class);
+        }
+    }
+
+    /**
+     * 根据memberId和courseId查询记录
+     */
+    public MemberCourse select(String memberId, String courseId) {
+        MemberCourseExample example = new MemberCourseExample();
+        example.createCriteria()
+                .andCourseIdEqualTo(courseId)
+                .andMemberIdEqualTo(memberId);
+        List<MemberCourse> memberCourseList = memberCourseMapper.selectByExample(example);
+        if (CollectionUtils.isEmpty(memberCourseList)) {
+            return null;
+        } else {
+            return memberCourseList.get(0);
+        }
+    }
+
+    /**
+     * 获取报名信息
+     */
+    public MemberCourseDto getEnroll(MemberCourseDto memberCourseDto) {
+        MemberCourse memberCourse = this.select(memberCourseDto.getMemberId(), memberCourseDto.getCourseId());
+        return CopyUtil.copy(memberCourse, MemberCourseDto.class);
+    }
 }
