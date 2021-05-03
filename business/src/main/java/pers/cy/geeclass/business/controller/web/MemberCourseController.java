@@ -38,11 +38,11 @@ public class MemberCourseController {
     /**
      * 保存，id有值时更新，无值时新增
      */
-//    @PostMapping("/get-enroll")
-//    public ResponseDto getEnroll(@RequestBody MemberCourseDto memberCourseDto) {
-//        ResponseDto responseDto = new ResponseDto();
-//        memberCourseDto = memberCourseService.getEnroll(memberCourseDto);
-//        responseDto.setContent(memberCourseDto);
-//        return responseDto;
-//    }
+    @PostMapping("/get-enroll")
+    public ResponseDto getEnroll(@RequestBody MemberCourseDto memberCourseDto) {
+        ResponseDto responseDto = new ResponseDto();
+        memberCourseDto = memberCourseService.getEnroll(memberCourseDto);
+        responseDto.setContent(memberCourseDto);
+        return responseDto;
+    }
 }
