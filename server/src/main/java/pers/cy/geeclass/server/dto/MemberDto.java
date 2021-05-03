@@ -31,11 +31,6 @@ public class MemberDto {
     private String photo;
 
 
-    /**
-     * 图片验证码
-     */
-    private String imageCode;
-
     @Override
     public String toString() {
         return "MemberDto{" +
@@ -45,10 +40,29 @@ public class MemberDto {
                 ", name='" + name + '\'' +
                 ", photo='" + photo + '\'' +
                 ", imageCode='" + imageCode + '\'' +
+                ", smsCode='" + smsCode + '\'' +
                 ", imageCodeToken='" + imageCodeToken + '\'' +
                 ", registerTime=" + registerTime +
                 '}';
     }
+
+    /**
+     * 图片验证码
+     */
+    private String imageCode;
+
+    public String getSmsCode() {
+        return smsCode;
+    }
+
+    public void setSmsCode(String smsCode) {
+        this.smsCode = smsCode;
+    }
+
+    /**
+     * 短信验证码
+     */
+    private String smsCode;
 
     public String getImageCode() {
         return imageCode;

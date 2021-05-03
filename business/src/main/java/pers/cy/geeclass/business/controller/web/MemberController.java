@@ -10,8 +10,11 @@ import org.springframework.web.bind.annotation.*;
 import pers.cy.geeclass.server.dto.LoginMemberDto;
 import pers.cy.geeclass.server.dto.MemberDto;
 import pers.cy.geeclass.server.dto.ResponseDto;
+import pers.cy.geeclass.server.dto.SmsDto;
+import pers.cy.geeclass.server.enums.SmsUseEnum;
 import pers.cy.geeclass.server.exception.BusinessException;
 import pers.cy.geeclass.server.service.MemberService;
+import pers.cy.geeclass.server.service.SmsService;
 import pers.cy.geeclass.server.util.UuidUtil;
 import pers.cy.geeclass.server.util.ValidatorUtil;
 
@@ -31,8 +34,8 @@ public class MemberController {
     @Resource(name = "redisTemplate")
     private RedisTemplate redisTemplate;
 
-//    @Resource
-//    private SmsService smsService;
+    @Resource
+    private SmsService smsService;
 
     /**
      * 保存，id有值时更新，无值时新增
@@ -50,12 +53,12 @@ public class MemberController {
         memberDto.setPassword(DigestUtils.md5DigestAsHex(memberDto.getPassword().getBytes()));
 
         // 校验短信验证码
-//        SmsDto smsDto = new SmsDto();
-//        smsDto.setMobile(memberDto.getMobile());
-//        smsDto.setCode(memberDto.getSmsCode());
-//        smsDto.setUse(SmsUseEnum.REGISTER.getCode());
-//        smsService.validCode(smsDto);
-//        LOG.info("短信验证码校验通过");
+        SmsDto smsDto = new SmsDto();
+        smsDto.setMobile(memberDto.getMobile());
+        smsDto.setCode(memberDto.getSmsCode());
+        smsDto.setUse(SmsUseEnum.REGISTER.getCode());
+        smsService.validCode(smsDto);
+        LOG.info("短信验证码校验通过");
 
         ResponseDto responseDto = new ResponseDto();
         memberService.save(memberDto);
