@@ -50,11 +50,10 @@
             </div>
             <div class="form-group">
               <div class="input-group">
-<!--                <input v-on:blur="onRegisterMobileCodeBlur()"-->
-<!--                       v-bind:class="registerMobileCodeValidateClass"-->
-<!--                       id="register-mobile-code" class="form-control"-->
-<!--                       placeholder="手机验证码" v-model="memberRegister.smsCode">-->
-                <input id="register-mobile-code" v-model="memberRegister.code" class="form-control" placeholder="手机验证码">
+                <input v-on:blur="onRegisterMobileCodeBlur()"
+                       v-bind:class="registerMobileCodeValidateClass"
+                       id="register-mobile-code" class="form-control"
+                       placeholder="手机验证码" v-model="memberRegister.smsCode">
 
                 <div class="input-group-append">
                   <button class="btn btn-outline-secondary" id="register-send-code-btn"
@@ -62,34 +61,31 @@
                   </button>
                 </div>
               </div>
-<!--              <span v-show="registerMobileCodeValidate === false" class="text-danger">请输入短信6位验证码</span>-->
+              <span v-show="registerMobileCodeValidate === false" class="text-danger">请输入短信6位验证码</span>
             </div>
             <div class="form-group">
-<!--              <input v-on:blur="onRegisterNameBlur()"-->
-<!--                     v-bind:class="registerNameValidateClass"-->
-<!--                     id="register-name" v-model="memberRegister.name"-->
-<!--                     class="form-control" placeholder="昵称">-->
-              <input id="register-name" v-model="memberRegister.name" class="form-control" placeholder="昵称">
+              <input v-on:blur="onRegisterNameBlur()"
+                     v-bind:class="registerNameValidateClass"
+                     id="register-name" v-model="memberRegister.name"
+                     class="form-control" placeholder="昵称">
 
-<!--              <span v-show="registerNameValidate === false" class="text-danger">昵称2到20位中文，字母，数字，下划线组合</span>-->
+              <span v-show="registerNameValidate === false" class="text-danger">昵称2到20位中文，字母，数字，下划线组合</span>
             </div>
             <div class="form-group">
-<!--              <input v-on:blur="onRegisterPasswordBlur()"-->
-<!--                     v-bind:class="registerPasswordValidateClass"-->
-<!--                     id="register-password" v-model="memberRegister.passwordOriginal"-->
-<!--                     class="form-control" placeholder="密码" type="password">-->
-<!--              <span v-show="registerPasswordValidate === false" class="text-danger">密码最少6位，包含至少1字母和1个数字</span>-->
-              <input id="register-password" v-model="memberRegister.passwordOriginal" class="form-control" placeholder="密码" type="password">
+              <input v-on:blur="onRegisterPasswordBlur()"
+                     v-bind:class="registerPasswordValidateClass"
+                     id="register-password" v-model="memberRegister.passwordOriginal"
+                     class="form-control" placeholder="密码" type="password">
+              <span v-show="registerPasswordValidate === false" class="text-danger">密码最少6位，包含至少1字母和1个数字</span>
 
             </div>
             <div class="form-group">
-<!--              <input v-on:blur="onRegisterConfirmPasswordBlur()"-->
-<!--                     v-bind:class="registerConfirmPasswordValidateClass"-->
-<!--                     id="register-confirm-password" v-model="memberRegister.confirm"-->
-<!--                     class="form-control" placeholder="确认密码"-->
-<!--                     name="memberRegisterConfirm" type="password">-->
-<!--              <span v-show="registerConfirmPasswordValidate === false" class="text-danger">确认密码和密码一致</span>-->
-              <input id="register-confirm-password" v-model="memberRegister.confirm" class="form-control" placeholder="确认密码"  name="memberRegisterConfirm" type="password">
+              <input v-on:blur="onRegisterConfirmPasswordBlur()"
+                     v-bind:class="registerConfirmPasswordValidateClass"
+                     id="register-confirm-password" v-model="memberRegister.confirm"
+                     class="form-control" placeholder="确认密码"
+                     name="memberRegisterConfirm" type="password">
+              <span v-show="registerConfirmPasswordValidate === false" class="text-danger">确认密码和密码一致</span>
 
             </div>
             <div class="form-group">
@@ -182,10 +178,10 @@
 
         // 注册框显示错误信息
         registerMobileValidate: null,
-        // registerMobileCodeValidate: null,
-        // registerPasswordValidate: null,
-        // registerNameValidate: null,
-        // registerConfirmPasswordValidate: null,
+        registerMobileCodeValidate: null,
+        registerPasswordValidate: null,
+        registerNameValidate: null,
+        registerConfirmPasswordValidate: null,
 
         // 忘记密码框显示错误信息
         // forgetMobileValidate: null,
@@ -201,30 +197,30 @@
           'border-danger': this.registerMobileValidate === false,
         }
       },
-      // registerMobileCodeValidateClass: function () {
-      //   return {
-      //     'border-success': this.registerMobileCodeValidate === true,
-      //     'border-danger': this.registerMobileCodeValidate === false,
-      //   }
-      // },
-      // registerPasswordValidateClass: function () {
-      //   return {
-      //     'border-success': this.registerPasswordValidate === true,
-      //     'border-danger': this.registerPasswordValidate === false,
-      //   }
-      // },
-      // registerNameValidateClass: function () {
-      //   return {
-      //     'border-success': this.registerNameValidate === true,
-      //     'border-danger': this.registerNameValidate === false,
-      //   }
-      // },
-      // registerConfirmPasswordValidateClass: function () {
-      //   return {
-      //     'border-success': this.registerConfirmPasswordValidate === true,
-      //     'border-danger': this.registerConfirmPasswordValidate === false,
-      //   }
-      // },
+      registerMobileCodeValidateClass: function () {
+        return {
+          'border-success': this.registerMobileCodeValidate === true,
+          'border-danger': this.registerMobileCodeValidate === false,
+        }
+      },
+      registerPasswordValidateClass: function () {
+        return {
+          'border-success': this.registerPasswordValidate === true,
+          'border-danger': this.registerPasswordValidate === false,
+        }
+      },
+      registerNameValidateClass: function () {
+        return {
+          'border-success': this.registerNameValidate === true,
+          'border-danger': this.registerNameValidate === false,
+        }
+      },
+      registerConfirmPasswordValidateClass: function () {
+        return {
+          'border-success': this.registerConfirmPasswordValidate === true,
+          'border-danger': this.registerConfirmPasswordValidate === false,
+        }
+      },
       // forgetMobileValidateClass: function () {
       //   return {
       //     'border-success': this.forgetMobileValidate === true,
@@ -502,33 +498,33 @@
         _this.registerMobileValidate = Pattern.validateMobile(_this.memberRegister.mobile);
         return _this.registerMobileValidate;
       },
-      //
-      // onRegisterMobileCodeBlur () {
-      //   let _this = this;
-      //   _this.registerMobileCodeValidate = Pattern.validateMobileCode(_this.memberRegister.smsCode);
-      //   return _this.registerMobileValidate;
-      // },
-      //
-      // onRegisterNameBlur () {
-      //   let _this = this;
-      //   _this.registerNameValidate = Pattern.validateName(_this.memberRegister.name);
-      //   return _this.registerMobileValidate;
-      // },
-      //
-      // onRegisterPasswordBlur () {
-      //   let _this = this;
-      //   _this.registerPasswordValidate = Pattern.validatePasswordWeak(_this.memberRegister.passwordOriginal);
-      //   return _this.registerMobileValidate;
-      // },
-      //
-      // onRegisterConfirmPasswordBlur () {
-      //   let _this = this;
-      //   let confirmPassword = $("#register-confirm-password").val();
-      //   if (Tool.isEmpty(confirmPassword)) {
-      //     return _this.registerConfirmPasswordValidate = false;
-      //   }
-      //   return _this.registerConfirmPasswordValidate = (confirmPassword === _this.memberRegister.passwordOriginal);
-      // },
+
+      onRegisterMobileCodeBlur () {
+        let _this = this;
+        _this.registerMobileCodeValidate = Pattern.validateMobileCode(_this.memberRegister.smsCode);
+        return _this.registerMobileValidate;
+      },
+
+      onRegisterNameBlur () {
+        let _this = this;
+        _this.registerNameValidate = Pattern.validateName(_this.memberRegister.name);
+        return _this.registerMobileValidate;
+      },
+
+      onRegisterPasswordBlur () {
+        let _this = this;
+        _this.registerPasswordValidate = Pattern.validatePasswordWeak(_this.memberRegister.passwordOriginal);
+        return _this.registerMobileValidate;
+      },
+
+      onRegisterConfirmPasswordBlur () {
+        let _this = this;
+        let confirmPassword = $("#register-confirm-password").val();
+        if (Tool.isEmpty(confirmPassword)) {
+          return _this.registerConfirmPasswordValidate = false;
+        }
+        return _this.registerConfirmPasswordValidate = (confirmPassword === _this.memberRegister.passwordOriginal);
+      },
       //
       // //-------------------------------- 忘记密码框校验 ----------------------------
       //
