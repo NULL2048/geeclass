@@ -16,7 +16,7 @@
           <a href="index.html" class="navbar-brand">
             <small>
               <i>
-                <img src="../../public/ace/assets/images/logo.png" height="45" width="156.816">
+                <img src="../../public/ace/assets/images/logo1.png" height="45" width="156.816">
               </i>
             </small>
           </a>
