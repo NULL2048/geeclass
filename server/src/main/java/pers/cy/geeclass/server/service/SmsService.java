@@ -74,7 +74,7 @@ public class SmsService {
      * 新增
      */
     private void insert(Sms sms) {
-                Date now = new Date();
+        Date now = new Date();
 
         sms.setId(UuidUtil.getShortUuid());
         smsMapper.insert(sms);
