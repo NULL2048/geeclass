@@ -17,13 +17,16 @@
             <div class="position-relative">
               <div id="login-box" class="login-box visible widget-box no-border">
                 <div class="widget-body">
-                  <div class="widget-main" align="center">
+                  <div class="widget-main">
                     <h4 class="header blue lighter bigger">
-                      <i>
-                        <img src="https://geeclass-course.oss-cn-beijing.aliyuncs.com/img/header-logo.png" height="45" width="156.816">
-                      </i>
-                      <br>
-                      请输入用户密码
+                      <div align="center">
+                        <i>
+                          <img src="https://geeclass-course.oss-cn-beijing.aliyuncs.com/img/header-logo.png" height="45" width="156.816">
+                        </i>
+                        <br>
+                        请输入用户密码
+                      </div>
+
                     </h4>
 
                     <div class="space-6"></div>
