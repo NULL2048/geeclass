@@ -335,7 +335,9 @@
 
         setTimeout(function () {
           let ele = document.getElementById("video");
+          // console.log(ele);
           _this.section.time = parseInt(ele.duration, 10);
+          // console.log(_this.section.time);
         }, 1000);
       },
 

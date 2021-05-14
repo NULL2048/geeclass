@@ -354,7 +354,7 @@
             _this.list(1);
             Toast.success("保存成功！");
           } else {
-            Toast.warning(resp.message)
+            Toast.warning(resp.message);
           }
         })
       },

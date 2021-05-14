@@ -69,9 +69,9 @@ public class FileService {
      * 新增
      */
     private void insert(File file) {
-                Date now = new Date();
-                file.setCreatedAt(now);
-                file.setUpdatedAt(now);
+        Date now = new Date();
+        file.setCreatedAt(now);
+        file.setUpdatedAt(now);
 
         file.setId(UuidUtil.getShortUuid());
         fileMapper.insert(file);
@@ -81,7 +81,7 @@ public class FileService {
      * 更新
      */
     private void update(File file) {
-                file.setUpdatedAt(new Date());
+        file.setUpdatedAt(new Date());
         fileMapper.updateByPrimaryKey(file);
     }
 

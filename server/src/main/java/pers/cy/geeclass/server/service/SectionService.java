@@ -88,7 +88,7 @@ public class SectionService {
         section.setUpdatedAt(now);
 
         section.setId(UuidUtil.getShortUuid());
-        section.setCharge(SectionChargeEnum.CHARGE.getCode());
+//        section.setCharge(SectionChargeEnum.CHARGE.getCode());
         sectionMapper.insert(section);
     }
 

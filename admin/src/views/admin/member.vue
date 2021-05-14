@@ -17,7 +17,6 @@
         <th>昵称</th>
         <th>头像url</th>
         <th>注册时间</th>
-        <th>操作</th>
       </tr>
       </thead>
 

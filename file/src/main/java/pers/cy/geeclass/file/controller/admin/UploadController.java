@@ -1,8 +1,8 @@
 package pers.cy.geeclass.file.controller.admin;
 
 import com.alibaba.fastjson.JSON;
-//import com.aliyuncs.DefaultAcsClient;
-//import com.aliyuncs.vod.model.v20170321.GetMezzanineInfoResponse;
+import com.aliyuncs.DefaultAcsClient;
+import com.aliyuncs.vod.model.v20170321.GetMezzanineInfoResponse;
 import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.vod.model.v20170321.GetMezzanineInfoResponse;
 import org.slf4j.Logger;
@@ -35,10 +35,10 @@ public class UploadController {
 
     @Value("${file.domain}")
     private String FILE_DOMAIN;
-//
-//    @Value("${oss.domain}")
-//    private String OSS_DOMAIN;
-//
+
+    @Value("${oss.domain}")
+    private String OSS_DOMAIN;
+
     @Value("${file.path}")
     private String FILE_PATH;
 
@@ -163,7 +163,7 @@ public class UploadController {
 //            fileDto.setPath(FILE_DOMAIN + fileDto.getPath());
 
             if (StringUtils.isEmpty(fileDto.getVod())) {
-                fileDto.setPath(FILE_DOMAIN + fileDto.getPath());
+                fileDto.setPath(OSS_DOMAIN + fileDto.getPath());
             } else {
                 DefaultAcsClient vodClient = VodUtil.initVodClient(accessKeyId, accessKeySecret);
                 GetMezzanineInfoResponse response = VodUtil.getMezzanineInfo(vodClient, fileDto.getVod());

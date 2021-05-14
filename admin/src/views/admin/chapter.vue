@@ -29,6 +29,7 @@
       <tr>
         <th>ID</th>
         <th>名称</th>
+        <th>所属课程ID</th>
         <th>操作</th>
       </tr>
       </thead>

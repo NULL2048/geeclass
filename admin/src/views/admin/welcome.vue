@@ -5,43 +5,43 @@
       <div class="col-xs-12">
         <div class="text-center">
           <span class="btn btn-app btn-sm btn-light no-hover">
-              <span class="line-height-1 bigger-170 blue"> 518 </span>
+              <span class="line-height-1 bigger-170 blue"> 3 </span>
               <br>
               <span class="line-height-1 smaller-90"> 课程 </span>
           </span>
           <span class="btn btn-app btn-sm btn-yellow no-hover">
-              <span class="line-height-1 bigger-170"> 6,321 </span>
+              <span class="line-height-1 bigger-170"> 6 </span>
 
               <br>
               <span class="line-height-1 smaller-90"> 大章 </span>
           </span>
 
           <span class="btn btn-app btn-sm btn-pink no-hover">
-              <span class="line-height-1 bigger-170"> 4,182 </span>
+              <span class="line-height-1 bigger-170"> 12 </span>
 
               <br>
               <span class="line-height-1 smaller-90"> 小节 </span>
           </span>
 
           <span class="btn btn-app btn-sm btn-success no-hover">
-              <span class="line-height-1 bigger-170"> 5.23 </span>
+              <span class="line-height-1 bigger-170"> 23 </span>
 
               <br>
-              <span class="line-height-1 smaller-90"> 会员(万) </span>
+              <span class="line-height-1 smaller-90"> 会员 </span>
           </span>
 
           <span class="btn btn-app btn-sm btn-primary no-hover">
-              <span class="line-height-1 bigger-170"> 12.76 </span>
+              <span class="line-height-1 bigger-170"> 240 </span>
 
               <br>
-              <span class="line-height-1 smaller-90"> 报名(万) </span>
+              <span class="line-height-1 smaller-90"> 报名 </span>
           </span>
 
           <span class="btn btn-app btn-sm btn-grey no-hover">
-              <span class="line-height-1 bigger-170"> 32.96 </span>
+              <span class="line-height-1 bigger-170"> 3 </span>
 
               <br>
-              <span class="line-height-1 smaller-90"> 评论(万) </span>
+              <span class="line-height-1 smaller-90"> 评论 </span>
           </span>
 
         </div>
@@ -61,7 +61,7 @@
           </div>
 
           <div class="infobox-data">
-            <span class="infobox-data-number">332</span>
+            <span class="infobox-data-number">2</span>
             <div class="infobox-content">新增评论</div>
           </div>
 
@@ -74,7 +74,7 @@
           </div>
 
           <div class="infobox-data">
-            <span class="infobox-data-number">58</span>
+            <span class="infobox-data-number">19</span>
             <div class="infobox-content">新增注册会员</div>
           </div>
 
@@ -90,7 +90,7 @@
           </div>
 
           <div class="infobox-data">
-            <span class="infobox-data-number">108</span>
+            <span class="infobox-data-number">53</span>
             <div class="infobox-content">课程报名</div>
           </div>
           <div class="stat stat-important">4%</div>
@@ -159,64 +159,41 @@
 
                 <tbody>
                 <tr>
-                  <td>开发工具IDEA从入门到爱不释手</td>
+                  <td>Vue从基础入门到项目实战</td>
 
                   <td>
-                    <b class="green">￥299.00</b>
+                    <b class="green">免费</b>
                   </td>
 
                   <td>
-                    <span class="label label-warning arrowed arrowed-right">5,132</span>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td>开发工具IDEA从入门到爱不释手</td>
-
-                  <td>
-                    <b class="red">￥388.00</b>
-                  </td>
-
-                  <td>
-                    <span class="label label-warning arrowed arrowed-right">3,132</span>
+                    <span class="label label-warning arrowed arrowed-right">120</span>
                   </td>
                 </tr>
 
                 <tr>
-                  <td>开发工具IDEA从入门到爱不释手</td>
+                  <td>Python从入门到实践</td>
+
+                  <td>
+                    <b class="red">￥299.00</b>
+                  </td>
+
+                  <td>
+                    <span class="label label-warning arrowed arrowed-right">67</span>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>Java从入门到精通</td>
 
                   <td>
                     <b class="green">￥199.00</b>
                   </td>
 
                   <td>
-                    <span class="label label-warning arrowed arrowed-right">2,132</span>
+                    <span class="label label-warning arrowed arrowed-right">52</span>
                   </td>
                 </tr>
 
-                <tr>
-                  <td>开发工具IDEA从入门到爱不释手</td>
-
-                  <td>
-                    <b class="green">￥299.00</b>
-                  </td>
-
-                  <td>
-                    <span class="label label-success arrowed arrowed-right">1,654</span>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td>开发工具IDEA从入门到爱不释手</td>
-
-                  <td>
-                    <b class="green">￥199.00</b>
-                  </td>
-
-                  <td>
-                    <span class="label label-success arrowed arrowed-right">1,254</span>
-                  </td>
-                </tr>
                 </tbody>
               </table>
             </div><!-- /.widget-main -->
@@ -297,7 +274,7 @@ export default {
       let data = [
         { label: "Java",  data: 38.7, color: "#68BC31"},
         { label: "Python",  data: 24.5, color: "#2091CF"},
-        { label: "Android",  data: 18.6, color: "#DA5430"},
+        { label: "Vue",  data: 18.6, color: "#DA5430"},
         { label: "其它",  data: 10, color: "#FEE074"},
       ];
       $.plot(placeholder, data, {
