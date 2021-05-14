@@ -17,9 +17,12 @@
             <div class="position-relative">
               <div id="login-box" class="login-box visible widget-box no-border">
                 <div class="widget-body">
-                  <div class="widget-main">
+                  <div class="widget-main" align="center">
                     <h4 class="header blue lighter bigger">
-                      <i class="ace-icon fa fa-coffee green"></i>
+                      <i>
+                        <img src="https://geeclass-course.oss-cn-beijing.aliyuncs.com/img/header-logo.png" height="45" width="156.816">
+                      </i>
+                      <br>
                       请输入用户密码
                     </h4>
 
@@ -226,6 +229,7 @@ export default {
 .input-group-addon {
   padding: 0;
 }
+
 </style>
 
 
